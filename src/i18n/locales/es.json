@@ -1,0 +1,149 @@
+{
+  "common": {
+    "loading": "Cargando...",
+    "error": "Error",
+    "success": "Éxito",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "save": "Guardar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "back": "Volver",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "sortBy": "Ordenar por",
+    "viewMore": "Ver más",
+    "viewLess": "Ver menos",
+    "currency": "COP"
+  },
+  "header": {
+    "searchPlaceholder": "Buscar productos...",
+    "cart": "Carrito",
+    "wishlist": "Lista de deseos",
+    "user": "Usuario",
+    "login": "Iniciar sesión",
+    "register": "Registrarse",
+    "logout": "Cerrar sesión"
+  },
+  "navigation": {
+    "themes": "Temas",
+    "interest": "Interés",
+    "exclusives": "Exclusivos",
+    "new": "Nuevos",
+    "adults": "Adultos",
+    "gifts": "Regalos",
+    "offers": "Ofertas",
+    "gallery": "Galería de Inspiración",
+    "combos": "Combos",
+    "eliteProgram": "Programa Elite",
+    "news": "Noticias"
+  },
+  "categories": {
+    "offers": "Ofertas",
+    "combos": "Combos",
+    "gifts": "Regalos",
+    "new": "Novedades",
+    "stem": "STEM"
+  },
+  "home": {
+    "hero": {
+      "title": "SORPRENDE EN ESTA NAVIDAD",
+      "subtitle": "CON NUESTRAS NOVEDADES",
+      "cta": "Ver Catálogo Completo"
+    },
+    "featuredProducts": {
+      "title": "SORPRENDE EN ESTA NAVIDAD CON NUESTRAS NOVEDADES",
+      "viewMore": "Ver Más"
+    },
+    "newsletter": {
+      "title": "¡Suscríbete a nuestro boletín!",
+      "description": "Los secretos de las construcciones más extraordinarias te están esperando.",
+      "placeholder": "Dirección de correo electrónico",
+      "button": "Registrarse"
+    },
+    "empty": {
+      "title": "No hay productos disponibles en este momento.",
+      "cta": "Ver Catálogo"
+    }
+  },
+  "products": {
+    "addToCart": "Agregar al carrito",
+    "viewDetails": "Ver más",
+    "outOfStock": "Agotado",
+    "inStock": "En stock",
+    "lowStock": "Últimas unidades",
+    "price": "Precio",
+    "comparePrice": "Antes",
+    "discount": "Descuento",
+    "new": "Nuevo",
+    "featured": "Destacado",
+    "freeShipping": "Envío gratis",
+    "sameDay": "Envío mismo día",
+    "pickupStore": "Recoge en tienda"
+  },
+  "cart": {
+    "title": "Carrito",
+    "empty": "Tu carrito está vacío",
+    "subtotal": "Subtotal",
+    "total": "Total",
+    "checkout": "Proceder al pago",
+    "continueShopping": "Seguir comprando",
+    "remove": "Eliminar",
+    "quantity": "Cantidad"
+  },
+  "auth": {
+    "login": {
+      "title": "Ingresar",
+      "email": "Correo electrónico",
+      "password": "Contraseña",
+      "button": "Ingresar",
+      "forgotPassword": "¿Olvidaste tu contraseña?",
+      "noAccount": "¿Cliente nuevo?",
+      "createAccount": "Crear cuenta",
+      "withFacebook": "Entrar con Facebook",
+      "withGoogle": "Entrar con Google",
+      "error": "Credenciales inválidas"
+    },
+    "register": {
+      "title": "Crear cuenta",
+      "firstName": "Nombre",
+      "lastName": "Apellido",
+      "email": "Correo electrónico",
+      "password": "Contraseña",
+      "confirmPassword": "Confirmar contraseña",
+      "button": "Crear cuenta",
+      "hasAccount": "¿Ya tienes cuenta?",
+      "login": "Iniciar sesión"
+    }
+  },
+  "footer": {
+    "followUs": "Síguenos",
+    "shop": "Compra",
+    "users": "Usuarios",
+    "store": "Tienda CACUS",
+    "lessClicks": "Menos Clics Más Bricks",
+    "myAccount": "Mi Cuenta",
+    "orderHistory": "Historial de Pedidos",
+    "newsletter": "Newsletter",
+    "eliteProgram": "Programa Elite",
+    "pqr": "PQR",
+    "returns": "Devoluciones",
+    "aboutUs": "Nosotros",
+    "missingPieces": "Piezas Faltantes",
+    "stores": "Nuestras Tiendas",
+    "sustainable": "CACUS Sostenible",
+    "copyright": "Propiedad artística © {year} {company}.",
+    "location": "{location} | Tel: {phone}"
+  },
+  "errors": {
+    "generic": "Ha ocurrido un error. Por favor, intenta de nuevo.",
+    "network": "Error de conexión. Verifica tu internet.",
+    "notFound": "No encontrado",
+    "unauthorized": "No autorizado",
+    "forbidden": "Acceso denegado",
+    "serverError": "Error del servidor"
+  }
+}
+

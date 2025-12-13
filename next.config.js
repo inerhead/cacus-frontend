@@ -15,10 +15,16 @@ const nextConfig = {
         pathname: '/avatars/**',
       },
       {
-        protocol: 'https',
-        hostname: 'via.placeholder.com',
+        protocol: 'http',
+        hostname: 'minio',
+        port: '9000',
+        pathname: '/**',
       },
     ],
+    // Allow data URLs for inline SVG placeholders
+    dangerouslyAllowSVG: true,
+    contentDispositionType: 'attachment',
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
   env: {
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,

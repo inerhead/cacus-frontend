@@ -5,24 +5,24 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 0 0% 0%;
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 0 0% 0%;
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 221.2 83.2% 53.3%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 221.2 83.2% 53.3%;
+    --popover-foreground: 0 0% 0%;
+    --primary: 54 100% 58%; /* Amarillo LEGO */
+    --primary-foreground: 0 0% 0%;
+    --secondary: 210 100% 40%; /* Azul LEGO */
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 95%;
+    --muted-foreground: 0 0% 45%;
+    --accent: 14 100% 60%; /* Naranja */
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 100% 45%; /* Rojo LEGO */
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 54 100% 58%;
     --radius: 0.5rem;
   }
 
@@ -54,6 +54,62 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-white text-black antialiased;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  }
+}
+
+@layer components {
+  /* LEGO Style Buttons */
+  .btn-lego {
+    @apply bg-lego-yellow text-black font-bold py-3 px-6 rounded-none 
+           hover:bg-lego-yellow-dark transition-colors duration-200 
+           active:scale-95 uppercase tracking-wide;
+  }
+  
+  .btn-lego-secondary {
+    @apply bg-lego-blue text-white font-bold py-3 px-6 rounded-none 
+           hover:bg-lego-blue-light transition-colors duration-200 
+           active:scale-95 uppercase tracking-wide;
+  }
+  
+  .btn-lego-black {
+    @apply bg-black text-white font-bold py-3 px-6 rounded-none 
+           hover:bg-lego-gray-darker transition-colors duration-200 
+           active:scale-95 uppercase tracking-wide;
+  }
+
+  /* LEGO Badges */
+  .badge-new {
+    @apply bg-green-500 text-white text-xs font-bold px-2 py-1 uppercase;
+  }
+  
+  .badge-shipping {
+    @apply bg-lego-yellow text-black text-xs font-bold px-2 py-1 uppercase;
+  }
+  
+  .badge-offer {
+    @apply bg-lego-red text-white text-xs font-bold px-2 py-1 uppercase;
+  }
+
+  /* LEGO Product Card */
+  .product-card {
+    @apply bg-white border border-gray-200 hover:shadow-lg 
+           transition-shadow duration-300 relative;
+  }
+
+  /* Writing vertical text */
+  .writing-vertical {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
+
+  /* Line clamp utility */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 }

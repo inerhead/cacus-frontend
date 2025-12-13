@@ -1,0 +1,149 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "search": "Search",
+    "filter": "Filter",
+    "sortBy": "Sort by",
+    "viewMore": "View more",
+    "viewLess": "View less",
+    "currency": "USD"
+  },
+  "header": {
+    "searchPlaceholder": "Search products...",
+    "cart": "Cart",
+    "wishlist": "Wishlist",
+    "user": "User",
+    "login": "Sign in",
+    "register": "Sign up",
+    "logout": "Sign out"
+  },
+  "navigation": {
+    "themes": "Themes",
+    "interest": "Interest",
+    "exclusives": "Exclusives",
+    "new": "New",
+    "adults": "Adults",
+    "gifts": "Gifts",
+    "offers": "Offers",
+    "gallery": "Inspiration Gallery",
+    "combos": "Combos",
+    "eliteProgram": "Elite Program",
+    "news": "News"
+  },
+  "categories": {
+    "offers": "Offers",
+    "combos": "Combos",
+    "gifts": "Gifts",
+    "new": "New",
+    "stem": "STEM"
+  },
+  "home": {
+    "hero": {
+      "title": "SURPRISE THIS CHRISTMAS",
+      "subtitle": "WITH OUR NEW ARRIVALS",
+      "cta": "View Full Catalog"
+    },
+    "featuredProducts": {
+      "title": "SURPRISE THIS CHRISTMAS WITH OUR NEW ARRIVALS",
+      "viewMore": "View More"
+    },
+    "newsletter": {
+      "title": "Subscribe to our newsletter!",
+      "description": "The secrets of the most extraordinary builds are waiting for you.",
+      "placeholder": "Email address",
+      "button": "Subscribe"
+    },
+    "empty": {
+      "title": "No products available at the moment.",
+      "cta": "View Catalog"
+    }
+  },
+  "products": {
+    "addToCart": "Add to cart",
+    "viewDetails": "View more",
+    "outOfStock": "Out of stock",
+    "inStock": "In stock",
+    "lowStock": "Low stock",
+    "price": "Price",
+    "comparePrice": "Was",
+    "discount": "Discount",
+    "new": "New",
+    "featured": "Featured",
+    "freeShipping": "Free shipping",
+    "sameDay": "Same day delivery",
+    "pickupStore": "Pick up in store"
+  },
+  "cart": {
+    "title": "Cart",
+    "empty": "Your cart is empty",
+    "subtotal": "Subtotal",
+    "total": "Total",
+    "checkout": "Checkout",
+    "continueShopping": "Continue shopping",
+    "remove": "Remove",
+    "quantity": "Quantity"
+  },
+  "auth": {
+    "login": {
+      "title": "Sign In",
+      "email": "Email",
+      "password": "Password",
+      "button": "Sign In",
+      "forgotPassword": "Forgot your password?",
+      "noAccount": "New customer?",
+      "createAccount": "Create account",
+      "withFacebook": "Sign in with Facebook",
+      "withGoogle": "Sign in with Google",
+      "error": "Invalid credentials"
+    },
+    "register": {
+      "title": "Create Account",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "button": "Create Account",
+      "hasAccount": "Already have an account?",
+      "login": "Sign in"
+    }
+  },
+  "footer": {
+    "followUs": "Follow Us",
+    "shop": "Shop",
+    "users": "Users",
+    "store": "CACUS Store",
+    "lessClicks": "Less Clicks More Bricks",
+    "myAccount": "My Account",
+    "orderHistory": "Order History",
+    "newsletter": "Newsletter",
+    "eliteProgram": "Elite Program",
+    "pqr": "Support",
+    "returns": "Returns",
+    "aboutUs": "About Us",
+    "missingPieces": "Missing Pieces",
+    "stores": "Our Stores",
+    "sustainable": "CACUS Sustainable",
+    "copyright": "Copyright © {year} {company}.",
+    "location": "{location} | Tel: {phone}"
+  },
+  "errors": {
+    "generic": "An error occurred. Please try again.",
+    "network": "Connection error. Check your internet.",
+    "notFound": "Not found",
+    "unauthorized": "Unauthorized",
+    "forbidden": "Access denied",
+    "serverError": "Server error"
+  }
+}
+

@@ -17,30 +17,48 @@ const config: Config = {
     },
     extend: {
       colors: {
+        // LEGO Brand Colors
+        lego: {
+          yellow: '#FFEB3B', // Amarillo brillante LEGO
+          'yellow-dark': '#FFD700',
+          red: '#E60012', // Rojo LEGO característico
+          'red-dark': '#DC143C',
+          blue: '#0066CC', // Azul LEGO
+          'blue-light': '#00A8E8',
+          orange: '#FF6B35', // Naranja para wishlist
+          black: '#000000',
+          white: '#FFFFFF',
+          gray: {
+            light: '#F5F5F5',
+            DEFAULT: '#E0E0E0',
+            dark: '#757575',
+            darker: '#424242',
+          },
+        },
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         primary: {
-          DEFAULT: 'hsl(var(--primary))',
-          foreground: 'hsl(var(--primary-foreground))',
+          DEFAULT: '#FFEB3B', // Amarillo LEGO como primary
+          foreground: '#000000',
         },
         secondary: {
-          DEFAULT: 'hsl(var(--secondary))',
-          foreground: 'hsl(var(--secondary-foreground))',
+          DEFAULT: '#0066CC', // Azul LEGO como secondary
+          foreground: '#FFFFFF',
         },
         destructive: {
-          DEFAULT: 'hsl(var(--destructive))',
-          foreground: 'hsl(var(--destructive-foreground))',
+          DEFAULT: '#E60012', // Rojo LEGO como destructive
+          foreground: '#FFFFFF',
         },
         muted: {
           DEFAULT: 'hsl(var(--muted))',
           foreground: 'hsl(var(--muted-foreground))',
         },
         accent: {
-          DEFAULT: 'hsl(var(--accent))',
-          foreground: 'hsl(var(--accent-foreground))',
+          DEFAULT: '#FF6B35', // Naranja como accent
+          foreground: '#FFFFFF',
         },
         popover: {
           DEFAULT: 'hsl(var(--popover))',
