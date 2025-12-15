@@ -83,6 +83,132 @@
   transform: scale(0.98);
 }
 
+/* Error Banner */
+.errorBanner {
+  background-color: #fee;
+  border: 1px solid #fcc;
+  color: #c33;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+  font-size: 0.875rem;
+}
+
+/* Addresses List */
+.addressesHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.addressesTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #000;
+  margin: 0;
+}
+
+.addressesList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.addressCard {
+  border: 2px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 1.5rem;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.addressCard:hover {
+  border-color: #0066CC;
+  box-shadow: 0 2px 8px rgba(0, 102, 204, 0.1);
+}
+
+.addressCardDefault {
+  border-color: #ffcf00;
+  background-color: #fffef0;
+}
+
+.defaultBadge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background-color: #ffcf00;
+  color: #000;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.addressContent {
+  margin-bottom: 1rem;
+}
+
+.addressName {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #000;
+  margin: 0 0 0.5rem 0;
+}
+
+.addressLine {
+  font-size: 0.938rem;
+  color: #666;
+  margin: 0.25rem 0;
+  line-height: 1.5;
+}
+
+.addressPhone {
+  font-size: 0.938rem;
+  color: #666;
+  margin: 0.5rem 0 0 0;
+  font-weight: 500;
+}
+
+.addressActions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e5e5;
+}
+
+.actionButton {
+  padding: 0.5rem 1rem;
+  font-size: 0.813rem;
+  font-weight: 600;
+  color: #0066CC;
+  background-color: transparent;
+  border: 1px solid #0066CC;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.actionButton:hover {
+  background-color: #0066CC;
+  color: #ffffff;
+}
+
+.deleteButton {
+  color: #d5122a;
+  border-color: #d5122a;
+}
+
+.deleteButton:hover {
+  background-color: #d5122a;
+  color: #ffffff;
+}
+
 /* Responsive Design */
 @media (max-width: 640px) {
   .container {
@@ -102,6 +228,28 @@
   }
 
   .addButton {
+    width: 100%;
+  }
+
+  .addressesHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .addressesTitle {
+    font-size: 1.125rem;
+  }
+
+  .addressCard {
+    padding: 1rem;
+  }
+
+  .addressActions {
+    flex-direction: column;
+  }
+
+  .actionButton {
     width: 100%;
   }
 }
