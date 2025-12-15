@@ -1,0 +1,177 @@
+/* Register page styles inspired by LEGO design */
+
+.registerContainer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f5f5;
+}
+
+.registerContent {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 1.5rem 1.5rem 1rem 1.5rem;
+}
+
+.registerFormWrapper {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.registerCard {
+  width: 100%;
+  max-width: 420px;
+  background: white;
+  padding: 2rem 1.75rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  border: 2px solid #e5e5e5;
+  margin-top: 0.5rem;
+}
+
+.registerHeader {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.registerTitle {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #000;
+  text-transform: none;
+  letter-spacing: 0;
+  margin-bottom: 0.5rem;
+}
+
+.registerSubtitle {
+  font-size: 0.875rem;
+  color: #666;
+  margin: 0;
+}
+
+.errorMessage {
+  margin-bottom: 1.5rem;
+  padding: 0.75rem;
+  background-color: #fee;
+  border: 1px solid #fcc;
+  color: #c33;
+  border-radius: 4px;
+  font-size: 0.875rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #111111;
+}
+
+.input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #d1d1d1;
+  border-radius: 4px;
+  font-size: 0.938rem;
+  color: #111111;
+  transition: border-color 0.2s ease;
+  font-family: inherit;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #0066CC;
+}
+
+.passwordHint {
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: #666;
+}
+
+.submitButton {
+  width: 100%;
+  padding: 0.875rem;
+  font-size: 0.938rem;
+  font-weight: 700;
+  color: #ffffff;
+  background-color: #0066CC;
+  border: 2px solid #0066CC;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.submitButton:hover:not(:disabled) {
+  background-color: #0052a3;
+  border-color: #0052a3;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 102, 204, 0.3);
+}
+
+.submitButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.registerLink {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: #666;
+}
+
+.registerLink a {
+  color: #0066CC;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.registerLink a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .registerContent {
+    padding: 1.5rem 1rem 1rem 1rem;
+  }
+
+  .registerCard {
+    padding: 1.5rem 1.25rem;
+    margin-top: 0.5rem;
+  }
+
+  .registerHeader {
+    margin-bottom: 1.25rem;
+  }
+
+  .formRow {
+    grid-template-columns: 1fr;
+  }
+}
+
