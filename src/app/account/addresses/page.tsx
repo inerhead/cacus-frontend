@@ -7,6 +7,9 @@ import Link from 'next/link';
 import { useTranslation } from '@/contexts/LanguageContext';
 import { addressesApi, Address, CreateAddressData, UpdateAddressData } from '@/lib/api/addresses';
 import AddressForm from '@/components/addresses/AddressForm';
+import ConfirmDialog from '@/components/ui/ConfirmDialog';
+import ToastContainer from '@/components/ui/ToastContainer';
+import { useToast } from '@/hooks/useToast';
 import styles from './addresses.module.css';
 
 export default function AddressesPage() {
@@ -18,6 +21,11 @@ export default function AddressesPage() {
   const [showForm, setShowForm] = useState(false);
   const [editingAddress, setEditingAddress] = useState<Address | undefined>();
   const [error, setError] = useState<string | null>(null);
+  const [deleteDialog, setDeleteDialog] = useState<{ isOpen: boolean; addressId: string | null }>({
+    isOpen: false,
+    addressId: null,
+  });
+  const { toasts, showToast, removeToast } = useToast();
 
   useEffect(() => {
     if (status === 'unauthenticated') {
@@ -56,17 +64,28 @@ export default function AddressesPage() {
     setShowForm(true);
   };
 
-  const handleDelete = async (id: string) => {
-    if (!confirm(t.account.addresses.deleteConfirm)) {
-      return;
-    }
+  const handleDeleteClick = (id: string) => {
+    setDeleteDialog({ isOpen: true, addressId: id });
+  };
+
+  const handleDeleteConfirm = async () => {
+    if (!deleteDialog.addressId) return;
 
     try {
       const accessToken = (session as any)?.accessToken;
-      await addressesApi.delete(id, accessToken);
+      await addressesApi.delete(deleteDialog.addressId, accessToken);
+      setDeleteDialog({ isOpen: false, addressId: null });
+      showToast(
+        t.account.addresses.deleteSuccess || 'Dirección eliminada exitosamente',
+        'success'
+      );
       await loadAddresses();
     } catch (err: any) {
-      alert(err.message || t.account.addresses.deleteError);
+      setDeleteDialog({ isOpen: false, addressId: null });
+      showToast(
+        err.message || t.account.addresses.deleteError,
+        'error'
+      );
       console.error('Error deleting address:', err);
     }
   };
@@ -75,9 +94,16 @@ export default function AddressesPage() {
     try {
       const accessToken = (session as any)?.accessToken;
       await addressesApi.setDefault(id, accessToken);
+      showToast(
+        t.account.addresses.setDefaultSuccess || 'Dirección establecida como predeterminada',
+        'success'
+      );
       await loadAddresses();
     } catch (err: any) {
-      alert(err.message || t.account.addresses.error);
+      showToast(
+        err.message || t.account.addresses.error,
+        'error'
+      );
       console.error('Error setting default address:', err);
     }
   };
@@ -87,8 +113,16 @@ export default function AddressesPage() {
       const accessToken = (session as any)?.accessToken;
       if (editingAddress) {
         await addressesApi.update(editingAddress.id, data, accessToken);
+        showToast(
+          t.account.addresses.updateSuccess || 'Dirección actualizada exitosamente',
+          'success'
+        );
       } else {
         await addressesApi.create(data, accessToken);
+        showToast(
+          t.account.addresses.createSuccess || 'Dirección creada exitosamente',
+          'success'
+        );
       }
       setShowForm(false);
       setEditingAddress(undefined);
@@ -97,7 +131,10 @@ export default function AddressesPage() {
       const errorMessage = editingAddress
         ? t.account.addresses.updateError
         : t.account.addresses.createError;
-      alert(err.message || errorMessage);
+      showToast(
+        err.message || errorMessage,
+        'error'
+      );
       console.error('Error saving address:', err);
       throw err;
     }
@@ -212,7 +249,7 @@ export default function AddressesPage() {
                           </button>
                           <button
                             className={`${styles.actionButton} ${styles.deleteButton}`}
-                            onClick={() => handleDelete(address.id)}
+                            onClick={() => handleDeleteClick(address.id)}
                           >
                             {t.account.addresses.delete}
                           </button>
@@ -225,6 +262,20 @@ export default function AddressesPage() {
             )}
           </>
         )}
+
+        {/* Delete Confirmation Dialog */}
+        <ConfirmDialog
+          isOpen={deleteDialog.isOpen}
+          message={t.account.addresses.deleteConfirm}
+          confirmText={t.common.delete}
+          cancelText={t.common.cancel}
+          type="danger"
+          onConfirm={handleDeleteConfirm}
+          onCancel={() => setDeleteDialog({ isOpen: false, addressId: null })}
+        />
+
+        {/* Toast Container */}
+        <ToastContainer toasts={toasts} onRemove={removeToast} />
       </div>
     </div>
   );

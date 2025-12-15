@@ -8,7 +8,12 @@
     "add": "Agregar",
     "search": "Buscar",
     "close": "Cerrar",
-    "back": "Volver"
+    "back": "Volver",
+    "confirm": "Confirmar",
+    "error": "Error",
+    "success": "Éxito",
+    "info": "Información",
+    "warning": "Advertencia"
   },
   "header": {
     "searchPlaceholder": "Buscar productos...",
@@ -127,7 +132,11 @@
       "createError": "Error al crear la dirección",
       "updateError": "Error al actualizar la dirección",
       "deleteError": "Error al eliminar la dirección",
-      "success": "Dirección guardada exitosamente"
+      "success": "Dirección guardada exitosamente",
+      "deleteSuccess": "Dirección eliminada exitosamente",
+      "updateSuccess": "Dirección actualizada exitosamente",
+      "createSuccess": "Dirección creada exitosamente",
+      "setDefaultSuccess": "Dirección establecida como predeterminada"
     }
   },
   "categories": {

@@ -8,7 +8,12 @@
     "add": "Add",
     "search": "Search",
     "close": "Close",
-    "back": "Back"
+    "back": "Back",
+    "confirm": "Confirm",
+    "error": "Error",
+    "success": "Success",
+    "info": "Information",
+    "warning": "Warning"
   },
   "header": {
     "searchPlaceholder": "Search products...",
@@ -127,7 +132,11 @@
       "createError": "Error creating address",
       "updateError": "Error updating address",
       "deleteError": "Error deleting address",
-      "success": "Address saved successfully"
+      "success": "Address saved successfully",
+      "deleteSuccess": "Address deleted successfully",
+      "updateSuccess": "Address updated successfully",
+      "createSuccess": "Address created successfully",
+      "setDefaultSuccess": "Address set as default"
     }
   },
   "categories": {
