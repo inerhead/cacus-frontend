@@ -1,137 +1,137 @@
+'use client';
+
 import Link from 'next/link';
 import { Facebook, Instagram } from 'lucide-react';
+import { useTranslation } from '@/contexts/LanguageContext';
+import styles from './Footer.module.css';
 
 export default function Footer() {
+  const t = useTranslation();
+
   return (
-    <footer className="bg-gray-100 text-gray-800 w-full mt-auto">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+    <footer className={styles.footer}>
+      <div className={styles.container}>
+        <div className={styles.grid}>
           {/* Follow Us Section */}
-          <div>
-            <h3 className="font-bold text-lg mb-4 uppercase">Síguenos</h3>
-            <div className="flex gap-4 mb-4">
+          <div className={styles.column}>
+            <h3 className={styles.columnTitle}>{t.footer.followUs}</h3>
+            <div className={styles.socialIcons}>
               <a
-                href="#"
-                className="bg-lego-blue text-white rounded-full p-2 hover:bg-lego-blue-light transition-colors"
+                href="https://facebook.com"
+                className={styles.socialIcon}
                 aria-label="Facebook"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <Facebook className="w-5 h-5" />
               </a>
               <a
-                href="#"
-                className="bg-black text-white rounded-full p-2 hover:bg-lego-gray-darker transition-colors"
+                href="https://instagram.com"
+                className={`${styles.socialIcon} ${styles.instagram}`}
                 aria-label="Instagram"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <Instagram className="w-5 h-5" />
               </a>
             </div>
-            <button className="bg-black text-white px-4 py-2 font-bold text-sm hover:bg-lego-gray-darker transition-colors flex items-center gap-2">
-              <span className="text-lego-yellow">●</span>
-              MENOS CLICS MÁS BRICKS
+            <button className={styles.bricksButton}>
+              <span className={styles.bricksDot}>●</span>
+              {t.footer.lessClicksMoreBricks}
             </button>
           </div>
 
           {/* Shop Section */}
-          <div>
-            <h3 className="font-bold text-lg mb-4 uppercase">Compra</h3>
-            <ul className="space-y-2">
+          <div className={styles.column}>
+            <h3 className={styles.columnTitle}>{t.footer.shop}</h3>
+            <ul className={styles.linksList}>
               <li>
-                <Link href="/temas" className="hover:text-lego-red transition-colors">
-                  Temas
+                <Link href="/temas" className={styles.link}>
+                  {t.navigation.themes}
                 </Link>
               </li>
               <li>
-                <Link href="/interes" className="hover:text-lego-red transition-colors">
-                  Interés
+                <Link href="/interes" className={styles.link}>
+                  {t.navigation.interest}
                 </Link>
               </li>
               <li>
-                <Link href="/exclusivos" className="hover:text-lego-red transition-colors">
-                  Exclusivos
+                <Link href="/nuevos" className={styles.link}>
+                  {t.navigation.new}
                 </Link>
               </li>
               <li>
-                <Link href="/nuevos" className="hover:text-lego-red transition-colors">
-                  Nuevos
+                <Link href="/adultos" className={styles.link}>
+                  {t.navigation.adults}
                 </Link>
               </li>
               <li>
-                <Link href="/adultos" className="hover:text-lego-red transition-colors">
-                  Adultos
-                </Link>
-              </li>
-              <li>
-                <Link href="/hogar" className="hover:text-lego-red transition-colors">
-                  Hogar
-                </Link>
-              </li>
-              <li>
-                <Link href="/ofertas" className="hover:text-lego-red transition-colors">
-                  Ofertas
+                <Link href="/ofertas" className={styles.link}>
+                  {t.navigation.offers}
                 </Link>
               </li>
             </ul>
           </div>
 
           {/* Users Section */}
-          <div>
-            <h3 className="font-bold text-lg mb-4 uppercase">Usuarios</h3>
-            <ul className="space-y-2">
+          <div className={styles.column}>
+            <h3 className={styles.columnTitle}>{t.footer.users}</h3>
+            <ul className={styles.linksList}>
               <li>
-                <Link href="/account" className="hover:text-lego-red transition-colors">
-                  Mi Cuenta
+                <Link href="/account" className={styles.link}>
+                  {t.footer.myAccount}
                 </Link>
               </li>
               <li>
-                <Link href="/orders" className="hover:text-lego-red transition-colors">
-                  Historial de Pedidos
+                <Link href="/orders" className={styles.link}>
+                  {t.footer.orderHistory}
                 </Link>
               </li>
               <li>
-                <Link href="/newsletter" className="hover:text-lego-red transition-colors">
-                  Newsletter
+                <Link href="/newsletter" className={styles.link}>
+                  {t.footer.newsletter}
                 </Link>
               </li>
               <li>
-                <Link href="/programa-elite" className="hover:text-lego-red transition-colors">
-                  Programa Elite
+                <Link href="/programa-elite" className={styles.link}>
+                  {t.footer.eliteProgram}
                 </Link>
               </li>
             </ul>
           </div>
 
           {/* Store Section */}
-          <div>
-            <h3 className="font-bold text-lg mb-4 uppercase">Tienda CACUS</h3>
-            <ul className="space-y-2">
+          <div className={styles.column}>
+            <h3 className={styles.columnTitle}>{t.footer.store}</h3>
+            <ul className={styles.linksList}>
               <li>
-                <Link href="/pqr" className="hover:text-lego-red transition-colors">
-                  PQR
+                <Link href="/pqr" className={styles.link}>
+                  {t.footer.pqr}
                 </Link>
               </li>
               <li>
-                <Link href="/devoluciones" className="hover:text-lego-red transition-colors">
-                  Devoluciones
+                <Link href="/devoluciones" className={styles.link}>
+                  {t.footer.returns}
                 </Link>
               </li>
               <li>
-                <Link href="/nosotros" className="hover:text-lego-red transition-colors">
-                  Nosotros
+                <Link href="/nosotros" className={styles.link}>
+                  {t.footer.aboutUs}
                 </Link>
               </li>
               <li>
-                <Link href="/piezas-faltantes" className="hover:text-lego-red transition-colors">
-                  Piezas Faltantes
+                <Link href="/piezas-faltantes" className={styles.link}>
+                  {t.footer.missingPieces}
                 </Link>
               </li>
               <li>
-                <Link href="/tiendas" className="hover:text-lego-red transition-colors">
-                  Nuestras Tiendas
+                <Link href="/tiendas" className={styles.link}>
+                  {t.footer.ourStores}
                 </Link>
               </li>
               <li>
-                <Link href="/sostenible" className="hover:text-lego-red transition-colors">
-                  CACUS Sostenible
+                <Link href="/sostenible" className={styles.link}>
+                  {t.footer.sustainable}
                 </Link>
               </li>
             </ul>
@@ -139,37 +139,36 @@ export default function Footer() {
         </div>
 
         {/* Legal Links */}
-        <div className="mt-8 pt-8 border-t border-gray-300">
-          <div className="flex flex-wrap gap-4 text-xs text-gray-600">
-            <Link href="/legales" className="hover:text-lego-red transition-colors">
-              LEGALES
+        <div className={styles.legalSection}>
+          <div className={styles.legalLinks}>
+            <Link href="/legales" className={styles.legalLink}>
+              {t.footer.legal}
             </Link>
-            <span>|</span>
-            <Link href="/privacidad" className="hover:text-lego-red transition-colors">
-              POLÍTICA DE PRIVACIDAD
+            <span className={styles.separator}>|</span>
+            <Link href="/privacidad" className={styles.legalLink}>
+              {t.footer.privacy}
             </Link>
-            <span>|</span>
-            <Link href="/terminos" className="hover:text-lego-red transition-colors">
-              TÉRMINOS Y CONDICIONES
+            <span className={styles.separator}>|</span>
+            <Link href="/terminos" className={styles.legalLink}>
+              {t.footer.terms}
             </Link>
-            <span>|</span>
-            <Link href="/despachos" className="hover:text-lego-red transition-colors">
-              POLÍTICA DE DESPACHOS Y DEVOLUCIONES
+            <span className={styles.separator}>|</span>
+            <Link href="/despachos" className={styles.legalLink}>
+              {t.footer.shipping}
             </Link>
-            <span>|</span>
-            <Link href="/reembolso" className="hover:text-lego-red transition-colors">
-              POLÍTICA DE REEMBOLSO DE DINERO
+            <span className={styles.separator}>|</span>
+            <Link href="/reembolso" className={styles.legalLink}>
+              {t.footer.refund}
             </Link>
           </div>
         </div>
 
         {/* Copyright */}
-        <div className="mt-6 text-center text-sm text-gray-600">
-          <p>Propiedad artística © {new Date().getFullYear()} CACUS GIFT COLOMBIA.</p>
-          <p className="mt-2">Barranquilla, Colombia | Tel: +57 XXX XXX XXXX</p>
+        <div className={styles.copyright}>
+          <p>{t.footer.copyright.replace('{year}', new Date().getFullYear().toString())}</p>
+          <p>{t.footer.contact}</p>
         </div>
       </div>
     </footer>
   );
 }
-

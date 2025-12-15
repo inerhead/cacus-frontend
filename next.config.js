@@ -20,6 +20,21 @@ const nextConfig = {
         port: '9000',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'lh3.googleusercontent.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'graph.facebook.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'scontent*.fbcdn.net',
+        pathname: '/**',
+      },
     ],
     // Allow data URLs for inline SVG placeholders
     dangerouslyAllowSVG: true,

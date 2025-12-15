@@ -1,0 +1,294 @@
+/* Login page styles inspired by LEGO design */
+
+.loginContainer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f5f5;
+}
+
+.loginContent {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1.5rem;
+}
+
+.loginFormWrapper {
+  width: 100%;
+  max-width: 580px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loginCard {
+  width: 100%;
+  max-width: 450px;
+  background: white;
+  padding: 3rem 2.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.loginHeader {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.loginTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #000;
+  text-transform: none;
+  letter-spacing: 0;
+  margin-bottom: 0.5rem;
+}
+
+.loginSubtitle {
+  font-size: 0.875rem;
+  color: #666;
+  margin-top: 0.5rem;
+}
+
+/* Form styles */
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.formLabel {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #333;
+  display: none; /* Hide labels, use placeholders instead like LEGO */
+}
+
+.formInput {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  font-size: 0.875rem;
+  border: 1px solid #d1d1d1;
+  background-color: #f9f9f9;
+  transition: all 0.2s ease;
+}
+
+.formInput:focus {
+  outline: none;
+  border-color: #000;
+  background-color: #fff;
+}
+
+.formInput::placeholder {
+  color: #999;
+}
+
+/* Primary button - Yellow LEGO style */
+.primaryButton {
+  padding: 0.75rem 1.75rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: capitalize;
+  letter-spacing: 0;
+  background-color: #FFEB3B;
+  color: #000;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.primaryButton:hover {
+  background-color: #FFD700;
+}
+
+.primaryButton:active {
+  transform: scale(0.98);
+}
+
+.primaryButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Button and links wrapper */
+.buttonLinksWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+/* Links section */
+.linksSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  align-items: flex-end;
+  font-size: 0.813rem;
+  flex: 1;
+}
+
+.link {
+  color: #0066CC;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.link:hover {
+  color: #004999;
+  text-decoration: underline;
+}
+
+/* Divider */
+.divider {
+  text-align: center;
+  margin: 1.75rem 0;
+  color: #666;
+  font-size: 0.813rem;
+  font-weight: 400;
+}
+
+/* OAuth buttons section */
+.oauthSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.oauthButton {
+  width: 100%;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  color: white;
+}
+
+.oauthButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.oauthButton:active {
+  transform: scale(0.98);
+}
+
+/* OAuth button variants */
+.facebookButton {
+  background-color: #1877F2;
+}
+
+.facebookButton:hover {
+  background-color: #166FE5;
+}
+
+.googleButton {
+  background-color: #DB4437;
+}
+
+.googleButton:hover {
+  background-color: #C23321;
+}
+
+.twitterButton {
+  background-color: #1DA1F2;
+}
+
+.twitterButton:hover {
+  background-color: #1A91DA;
+}
+
+.linkedinButton {
+  background-color: #0077B5;
+}
+
+.linkedinButton:hover {
+  background-color: #006399;
+}
+
+.instagramButton {
+  background: linear-gradient(45deg, #F58529, #DD2A7B, #8134AF, #515BD4);
+}
+
+.instagramButton:hover {
+  opacity: 0.9;
+}
+
+.amazonButton {
+  background-color: #FF9900;
+}
+
+.amazonButton:hover {
+  background-color: #E68A00;
+}
+
+/* OAuth icon */
+.oauthIcon {
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Error message */
+.errorMessage {
+  padding: 0.875rem 1rem;
+  background-color: #FEE;
+  border: 1px solid #FCC;
+  color: #C00;
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+  border-radius: 2px;
+}
+
+/* Register link */
+.registerSection {
+  text-align: center;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e0e0e0;
+  font-size: 0.875rem;
+  color: #666;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .loginCard {
+    padding: 2rem 1.5rem;
+  }
+
+  .loginTitle {
+    font-size: 1.75rem;
+  }
+
+  .buttonLinksWrapper {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .primaryButton {
+    width: 100%;
+  }
+
+  .linksSection {
+    align-items: flex-start;
+    width: 100%;
+  }
+}

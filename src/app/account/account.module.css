@@ -1,0 +1,218 @@
+/* Account page styles - LEGO inspired */
+
+.container {
+  background-color: #f5f5f5;
+  padding: 2rem 1rem 4rem 1rem;
+}
+
+.content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.loading {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.125rem;
+  color: #666;
+}
+
+/* Header Section */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #000;
+}
+
+.title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #000;
+  margin: 0;
+}
+
+.signOutButton {
+  padding: 0.625rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #0066CC;
+  background-color: transparent;
+  border: 1px solid #0066CC;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.signOutButton:hover {
+  background-color: #0066CC;
+  color: #ffffff;
+}
+
+/* Section Styles */
+.section {
+  background-color: #ffffff;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.sectionTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #000;
+  margin: 0 0 1rem 0;
+}
+
+/* User Info Section */
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.avatarContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.userAvatar {
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #ffcf00;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.userAvatar:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.userName {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #000;
+  margin: 0;
+  text-align: center;
+}
+
+.userEmail {
+  font-size: 0.938rem;
+  color: #666;
+  margin: 0;
+  text-align: center;
+}
+
+/* Language Selector */
+.languageSelector {
+  display: flex;
+  gap: 1rem;
+}
+
+.languageButton {
+  padding: 0.75rem 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #000;
+  background-color: #f5f5f5;
+  border: 2px solid #d1d1d1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.languageButton:hover {
+  border-color: #000;
+}
+
+.languageButton.active {
+  background-color: #FFEB3B;
+  border-color: #000;
+  font-weight: 700;
+}
+
+/* Address Section */
+.addressInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.addressName {
+  font-size: 0.938rem;
+  font-weight: 600;
+  color: #000;
+  margin: 0;
+}
+
+.link {
+  font-size: 0.875rem;
+  color: #0066CC;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.noData {
+  font-size: 0.875rem;
+  color: #999;
+  margin: 0.5rem 0 0 0;
+}
+
+/* Order History Section */
+.orderHistory {
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+  .container {
+    padding: 1rem 0.5rem;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .signOutButton {
+    width: 100%;
+  }
+
+  .section {
+    padding: 1rem;
+  }
+
+  .languageSelector {
+    flex-direction: column;
+  }
+
+  .languageButton {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .addressInfo {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}

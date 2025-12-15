@@ -9,7 +9,9 @@ declare module 'next-auth' {
       id: string;
       email: string;
       name?: string;
+      firstName?: string;
       image?: string;
+      avatarUrl?: string;
     };
   }
 
@@ -17,6 +19,9 @@ declare module 'next-auth' {
     id: string;
     email: string;
     name?: string;
+    firstName?: string;
+    image?: string;
+    avatarUrl?: string;
     accessToken?: string;
     refreshToken?: string;
   }
@@ -27,5 +32,7 @@ declare module 'next-auth/jwt' {
     accessToken?: string;
     refreshToken?: string;
     userId?: string;
+    firstName?: string;
+    avatarUrl?: string;
   }
 }

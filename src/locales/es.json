@@ -1,0 +1,115 @@
+{
+  "common": {
+    "loading": "Cargando...",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "add": "Agregar",
+    "search": "Buscar",
+    "close": "Cerrar",
+    "back": "Volver"
+  },
+  "header": {
+    "searchPlaceholder": "Buscar productos...",
+    "cart": "Carrito",
+    "user": "Usuario",
+    "login": "Iniciar sesión",
+    "myAccount": "Mi cuenta",
+    "shippingBanner": "ENVÍOS SEGUROS Y GRATIS EN COMPRAS A PARTIR DE $299.900"
+  },
+  "navigation": {
+    "themes": "TEMAS",
+    "interest": "INTERÉS",
+    "new": "NUEVOS",
+    "adults": "ADULTOS",
+    "gifts": "REGALOS",
+    "offers": "OFERTAS",
+    "combos": "COMBOS"
+  },
+  "footer": {
+    "followUs": "Síguenos",
+    "lessClicksMoreBricks": "MENOS CLICS MÁS BRICKS",
+    "shop": "Compra",
+    "users": "Usuarios",
+    "store": "Tienda CACUS",
+    "myAccount": "Mi Cuenta",
+    "orderHistory": "Historial de Pedidos",
+    "newsletter": "Newsletter",
+    "eliteProgram": "Programa Elite",
+    "pqr": "PQR",
+    "returns": "Devoluciones",
+    "aboutUs": "Nosotros",
+    "missingPieces": "Piezas Faltantes",
+    "ourStores": "Nuestras Tiendas",
+    "sustainable": "CACUS Sostenible",
+    "legal": "Legales",
+    "privacy": "Política de Privacidad",
+    "terms": "Términos y Condiciones",
+    "shipping": "Política de Despachos y Devoluciones",
+    "refund": "Política de Reembolso de Dinero",
+    "copyright": "Propiedad artística © {year} CACUS GIFT COLOMBIA.",
+    "contact": "Barranquilla, Colombia | Tel: +57 XXX XXX XXXX"
+  },
+  "home": {
+    "heroTitle": "SORPRENDE EN ESTA NAVIDAD",
+    "heroSubtitle": "CON NUESTRAS NOVEDADES",
+    "viewCatalog": "Ver Catálogo Completo",
+    "featuredTitle": "SORPRENDE EN ESTA NAVIDAD CON NUESTRAS NOVEDADES",
+    "viewMore": "Ver Más",
+    "noProducts": "No hay productos disponibles en este momento.",
+    "newsletterTitle": "¡Suscríbete a nuestro boletín!",
+    "newsletterText": "Los secretos de las construcciones más extraordinarias te están esperando.",
+    "newsletterPlaceholder": "Dirección de correo electrónico",
+    "register": "Registrarse"
+  },
+  "login": {
+    "title": "Ingresar",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "loginButton": "Ingresar",
+    "loggingIn": "Ingresando...",
+    "newCustomer": "¿Cliente nuevo? Crear cuenta",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "continueWith": "o continúa con",
+    "loginWithFacebook": "Entrar con Facebook",
+    "loginWithGoogle": "Entrar con Google",
+    "noAccount": "¿No tienes una cuenta?",
+    "registerHere": "Regístrate aquí",
+    "invalidCredentials": "Credenciales inválidas. Por favor, verifica tu email y contraseña.",
+    "error": "Ocurrió un error. Por favor, intenta de nuevo."
+  },
+  "account": {
+    "title": "Mi cuenta",
+    "signOut": "Cerrar sesión",
+    "defaultUser": "Usuario",
+    "language": "Idioma / Language",
+    "defaultAddress": "Dirección predeterminada",
+    "viewAddresses": "ver direcciones ({count})",
+    "noAddresses": "No tienes direcciones guardadas",
+    "orderHistory": "Historial de pedidos",
+    "noOrders": "No tiene pedidos",
+    "addresses": {
+      "title": "Mis direcciones",
+      "backToAccount": "← Volver a Mi cuenta",
+      "noAddresses": "No tienes direcciones guardadas",
+      "addNew": "Agregar nueva dirección"
+    }
+  },
+  "categories": {
+    "offers": "Ofertas",
+    "combos": "Combos",
+    "gifts": "Regalos",
+    "new": "Novedades",
+    "stem": "STEM"
+  },
+  "product": {
+    "freeShipping": "Envío gratis",
+    "new": "Nuevo",
+    "addToCart": "Agregar al carrito",
+    "buyNow": "Comprar ahora",
+    "description": "Descripción",
+    "specifications": "Especificaciones",
+    "reviews": "Reseñas"
+  }
+}

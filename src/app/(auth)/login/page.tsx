@@ -4,9 +4,12 @@ import { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { useTranslation } from '@/contexts/LanguageContext';
+import styles from './login.module.css';
 
 export default function LoginPage() {
   const router = useRouter();
+  const t = useTranslation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -25,13 +28,13 @@ export default function LoginPage() {
       });
 
       if (result?.error) {
-        setError('Credenciales inválidas. Por favor, verifica tu email y contraseña.');
+        setError(t.login.invalidCredentials);
       } else {
         router.push('/');
         router.refresh();
       }
     } catch (error) {
-      setError('Ocurrió un error. Por favor, intenta de nuevo.');
+      setError(t.login.error);
     } finally {
       setLoading(false);
     }
@@ -41,105 +44,112 @@ export default function LoginPage() {
     try {
       await signIn(provider, { callbackUrl: '/' });
     } catch (error) {
-      setError(`Error al iniciar sesión con ${provider}`);
+      setError(t.login.error);
     }
   };
 
+  const socialButtons = [
+    {
+      id: 'facebook',
+      label: t.login.loginWithFacebook,
+      provider: 'facebook' as const,
+      icon: 'f',
+      styleClass: styles.facebookButton
+    },
+    {
+      id: 'google',
+      label: t.login.loginWithGoogle,
+      provider: 'google' as const,
+      icon: 'g',
+      styleClass: styles.googleButton
+    }
+  ];
+
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full bg-white p-8 shadow-lg">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-black mb-2 uppercase">Ingresar</h1>
-        </div>
-
-        {error && (
-          <div className="mb-4 p-3 bg-red-50 border-2 border-lego-red text-lego-red text-sm">
-            {error}
-          </div>
-        )}
-
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <label htmlFor="email" className="sr-only">
-              Correo electrónico
-            </label>
-            <input
-              id="email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className="w-full px-4 py-3 border-2 border-gray-300 bg-white text-black placeholder-gray-400 focus:outline-none focus:border-lego-red focus:ring-2 focus:ring-lego-red rounded-none"
-              placeholder="Correo electrónico"
-            />
+    <div className={styles.loginContent}>
+      <div className={styles.loginFormWrapper}>
+        <div className={styles.loginCard}>
+          <div className={styles.loginHeader}>
+            <h1 className={styles.loginTitle}>{t.login.title}</h1>
           </div>
 
-          <div>
-            <label htmlFor="password" className="sr-only">
-              Contraseña
-            </label>
-            <input
-              id="password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              className="w-full px-4 py-3 border-2 border-gray-300 bg-white text-black placeholder-gray-400 focus:outline-none focus:border-lego-red focus:ring-2 focus:ring-lego-red rounded-none"
-              placeholder="Contraseña"
-            />
-          </div>
+          {error && (
+            <div className={styles.errorMessage}>{error}</div>
+          )}
 
-          <div className="flex items-center justify-between">
-            <button
-              type="submit"
-              disabled={loading}
-              className="btn-lego flex-1 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {loading ? 'Ingresando...' : 'Ingresar'}
-            </button>
-            <div className="flex flex-col gap-2 ml-4">
-              <Link href="/register" className="text-sm text-lego-blue hover:text-lego-blue-light font-semibold">
-                ¿Cliente nuevo? Crear cuenta
-              </Link>
-              <Link href="/forgot-password" className="text-sm text-lego-blue hover:text-lego-blue-light font-semibold">
-                ¿Olvidaste tu contraseña?
-              </Link>
+          <form onSubmit={handleSubmit} className={styles.loginForm}>
+            <div className={styles.formGroup}>
+              <label htmlFor="email" className={styles.formLabel}>
+                {t.login.email}
+              </label>
+              <input
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className={styles.formInput}
+                placeholder={t.login.email}
+              />
             </div>
-          </div>
-        </form>
 
-        <div className="mt-8">
-          <div className="relative mb-6">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-300" />
+            <div className={styles.formGroup}>
+              <label htmlFor="password" className={styles.formLabel}>
+                {t.login.password}
+              </label>
+              <input
+                id="password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                className={styles.formInput}
+                placeholder={t.login.password}
+              />
             </div>
+
+            <div className={styles.buttonLinksWrapper}>
+              <button
+                type="submit"
+                disabled={loading}
+                className={styles.primaryButton}
+              >
+                {loading ? t.login.loggingIn : t.login.loginButton}
+              </button>
+
+              <div className={styles.linksSection}>
+                <Link href="/register" className={styles.link}>
+                  {t.login.newCustomer}
+                </Link>
+                <Link href="/forgot-password" className={styles.link}>
+                  {t.login.forgotPassword}
+                </Link>
+              </div>
+            </div>
+          </form>
+
+          <div className={styles.divider}>{t.login.continueWith}</div>
+
+          <div className={styles.oauthSection}>
+            {socialButtons.map((button) => (
+              <button
+                key={button.id}
+                type="button"
+                onClick={() => button.provider && handleOAuthSignIn(button.provider)}
+                disabled={!button.provider}
+                className={`${styles.oauthButton} ${button.styleClass}`}
+              >
+                <span>{button.label}</span>
+                <span className={styles.oauthIcon}>{button.icon}</span>
+              </button>
+            ))}
           </div>
 
-          <div className="space-y-3">
-            <button
-              type="button"
-              onClick={() => handleOAuthSignIn('facebook')}
-              className="w-full bg-[#1877F2] text-white font-bold py-3 px-4 rounded-none hover:bg-[#166FE5] transition-colors flex items-center justify-center gap-2 uppercase"
-            >
-              <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-              </svg>
-              Entrar con Facebook
-            </button>
-
-            <button
-              type="button"
-              onClick={() => handleOAuthSignIn('google')}
-              className="w-full bg-[#DB4437] text-white font-bold py-3 px-4 rounded-none hover:bg-[#C23321] transition-colors flex items-center justify-center gap-2 uppercase"
-            >
-              <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
-                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
-              </svg>
-              Entrar con Google
-            </button>
+          <div className={styles.registerSection}>
+            {t.login.noAccount}{' '}
+            <Link href="/register" className={styles.link}>
+              {t.login.registerHere}
+            </Link>
           </div>
         </div>
       </div>
