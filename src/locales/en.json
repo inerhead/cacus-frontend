@@ -159,6 +159,10 @@
   "inventory": {
     "title": "Inventory Management",
     "addProduct": "Add Product",
+    "importExcel": "Import Excel",
+    "importing": "Importing...",
+    "template": "Template",
+    "downloadTemplate": "Download Excel Template",
     "editProduct": "Edit Product",
     "newProduct": "Add New Product",
     "backToInventory": "← Back to inventory",
@@ -237,7 +241,11 @@
       "deleteConfirm": "Are you sure you want to delete this product?",
       "deleteSuccess": "Product deleted successfully",
       "deleteError": "Error deleting product. Please try again.",
-      "loadError": "Error loading product"
+      "loadError": "Error loading product",
+      "invalidFileType": "Please select an Excel file (.xlsx or .xls)",
+      "fileTooLarge": "File is too large (maximum 5MB)",
+      "importSuccess": "{count} products imported successfully",
+      "importError": "Error importing products"
     }
   },
   "product": {

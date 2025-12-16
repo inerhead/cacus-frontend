@@ -2,13 +2,13 @@
 
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from '@/contexts/LanguageContext';
 import { useToastContext } from '@/contexts/ToastContext';
 import { productsApi, Product } from '@/lib/api/products';
 import ConfirmDialog from '@/components/ui/ConfirmDialog';
 import Button from '@/components/ui/Button';
-import { EditIcon, DeleteIcon } from '@/components/ui/icons';
+import { EditIcon, DeleteIcon, UploadIcon } from '@/components/ui/icons';
 import styles from './inventory.module.css';
 
 export default function InventoryPage() {
@@ -21,6 +21,8 @@ export default function InventoryPage() {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [deleteDialog, setDeleteDialog] = useState<{ isOpen: boolean; productId: string | null }>({ isOpen: false, productId: null });
+  const [importing, setImporting] = useState(false);
+  const fileInputRef = React.useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (status === 'unauthenticated') {
@@ -113,6 +115,91 @@ export default function InventoryPage() {
     }
   };
 
+  const handleImportClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    // Validate file type
+    const validTypes = ['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.ms-excel'];
+    if (!validTypes.includes(file.type) && !file.name.endsWith('.xlsx') && !file.name.endsWith('.xls')) {
+      showToast(t.inventory.messages.invalidFileType || 'Por favor selecciona un archivo Excel (.xlsx o .xls)', 'error');
+      return;
+    }
+
+    // Validate file size (max 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      showToast(t.inventory.messages.fileTooLarge || 'El archivo es demasiado grande (máximo 5MB)', 'error');
+      return;
+    }
+
+    try {
+      setImporting(true);
+      const formData = new FormData();
+      formData.append('file', file);
+
+      const accessToken = (session as any)?.accessToken;
+      if (!accessToken) {
+        showToast(t.inventory.messages.noSession, 'error');
+        return;
+      }
+
+      const response = await fetch('/api/products/import', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${accessToken}`,
+        },
+        body: formData,
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || 'Error al importar productos');
+      }
+
+      const result = await response.json();
+      showToast(
+        t.inventory.messages.importSuccess?.replace('{count}', result.imported || 0) || 
+        `${result.imported || 0} productos importados exitosamente`,
+        'success'
+      );
+      await loadProducts();
+    } catch (err: any) {
+      console.error('Error importing products:', err);
+      showToast(err.message || t.inventory.messages.importError || 'Error al importar productos', 'error');
+    } finally {
+      setImporting(false);
+      // Reset file input
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+    }
+  };
+
+  const handleDownloadTemplate = () => {
+    // Create template data
+    const template = [
+      ['SKU*', 'Name*', 'Price*', 'Stock*', 'ShortDescription', 'LongDescription', 'CompareAtPrice', 'Brand', 'Material', 'Status', 'Featured', 'New', 'AllowBackorder'],
+      ['EXAMPLE-001', 'Producto de Ejemplo', '99900', '10', 'Descripción corta', 'Descripción larga del producto', '129900', 'Marca Ejemplo', 'Madera', 'active', 'true', 'false', 'false'],
+      ['EXAMPLE-002', 'Otro Producto', '149900', '5', 'Otra descripción', 'Descripción detallada', '', 'Otra Marca', 'Plástico', 'draft', 'false', 'true', 'false'],
+    ];
+
+    // Convert to CSV
+    const csv = template.map(row => row.map(cell => `"${cell}"`).join(',')).join('\n');
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    link.setAttribute('href', url);
+    link.setAttribute('download', 'plantilla_productos.csv');
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   if (status === 'loading' || !session) {
     return (
       <div className={styles.container}>
@@ -140,13 +227,39 @@ export default function InventoryPage() {
             </Button>
             <h1 className={styles.title}>{t.inventory.title}</h1>
           </div>
-          <Button 
-            variant="primary"
-            size="medium"
-            onClick={() => router.push('/account/inventory/new')}
-          >
-            + {t.inventory.addProduct}
-          </Button>
+          <div className={styles.headerActions}>
+            <Button 
+              variant="secondary"
+              size="medium"
+              onClick={handleDownloadTemplate}
+              title={t.inventory.downloadTemplate || 'Descargar Plantilla'}
+            >
+              📥 {t.inventory.template || 'Plantilla'}
+            </Button>
+            <Button 
+              variant="black"
+              size="medium"
+              onClick={handleImportClick}
+              loading={importing}
+              disabled={importing}
+            >
+              <UploadIcon size={16} /> {importing ? (t.inventory.importing || 'Importando...') : (t.inventory.importExcel || 'Importar Excel')}
+            </Button>
+            <Button 
+              variant="primary"
+              size="medium"
+              onClick={() => router.push('/account/inventory/new')}
+            >
+              + {t.inventory.addProduct}
+            </Button>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept=".xlsx,.xls"
+              onChange={handleFileChange}
+              style={{ display: 'none' }}
+            />
+          </div>
         </div>
 
         {loading ? (

@@ -161,6 +161,10 @@
   "inventory": {
     "title": "Administración de Inventario",
     "addProduct": "Agregar Producto",
+    "importExcel": "Importar Excel",
+    "importing": "Importando...",
+    "template": "Plantilla",
+    "downloadTemplate": "Descargar Plantilla Excel",
     "editProduct": "Editar Producto",
     "newProduct": "Agregar Nuevo Producto",
     "backToInventory": "← Volver al inventario",
@@ -239,7 +243,11 @@
       "deleteConfirm": "¿Estás seguro de que deseas eliminar este producto?",
       "deleteSuccess": "Producto eliminado exitosamente",
       "deleteError": "Error al eliminar el producto. Por favor intenta nuevamente.",
-      "loadError": "Error al cargar el producto"
+      "loadError": "Error al cargar el producto",
+      "invalidFileType": "Por favor selecciona un archivo Excel (.xlsx o .xls)",
+      "fileTooLarge": "El archivo es demasiado grande (máximo 5MB)",
+      "importSuccess": "{count} productos importados exitosamente",
+      "importError": "Error al importar productos"
     }
   },
   "product": {
