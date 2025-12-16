@@ -27,6 +27,13 @@ export interface Product {
   safetyWarnings?: string[];
   certifications?: string[];
   imageUrl?: string;
+  images?: Array<{
+    id: string;
+    url: string;
+    altText?: string;
+    sortOrder: number;
+    isPrimary: boolean;
+  }>;
   categories?: Array<{
     id: string;
     name: string;
@@ -116,7 +123,47 @@ class ProductsAPI {
     const queryString = this.buildQueryString(params);
     return this.request<ProductsResponse>(`${this.baseURL}/new${queryString}`);
   }
+
+  async create(data: Partial<Product>, token?: string): Promise<Product> {
+    return this.request<Product>(this.baseURL, {
+      method: 'POST',
+      headers: {
+        'Authorization': token ? `Bearer ${token}` : '',
+      },
+      body: JSON.stringify(data),
+    });
+  }
+
+  async update(id: string, data: Partial<Product>, token?: string): Promise<Product> {
+    return this.request<Product>(`${this.baseURL}/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Authorization': token ? `Bearer ${token}` : '',
+      },
+      body: JSON.stringify(data),
+    });
+  }
+
+  async updateStock(id: string, stockQuantity: number, token?: string): Promise<Product> {
+    return this.request<Product>(`${this.baseURL}/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Authorization': token ? `Bearer ${token}` : '',
+      },
+      body: JSON.stringify({ stockQuantity }),
+    });
+  }
+
+  async delete(id: string, token?: string): Promise<void> {
+    await this.request<void>(`${this.baseURL}/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': token ? `Bearer ${token}` : '',
+      },
+    });
+  }
 }
 
 export const productsAPI = new ProductsAPI();
+export const productsApi = productsAPI;
 

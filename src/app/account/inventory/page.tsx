@@ -4,17 +4,21 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useTranslation } from '@/contexts/LanguageContext';
+import { useToastContext } from '@/contexts/ToastContext';
 import { productsApi, Product } from '@/lib/api/products';
+import ConfirmDialog from '@/components/ui/ConfirmDialog';
 import styles from './inventory.module.css';
 
 export default function InventoryPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const t = useTranslation();
+  const { showToast } = useToastContext();
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [deleteDialog, setDeleteDialog] = useState<{ isOpen: boolean; productId: string | null }>({ isOpen: false, productId: null });
 
   useEffect(() => {
     if (status === 'unauthenticated') {
@@ -30,18 +34,13 @@ export default function InventoryPage() {
     }
   }, [status, session, router]);
 
-  useEffect(() => {
-    if (session && (session.user as any)?.role === 'admin') {
-      loadProducts();
-    }
-  }, [session, page]);
-
   const loadProducts = async () => {
     try {
       setLoading(true);
       const data = await productsApi.getAll({ page, limit: 20, active: undefined });
-      setProducts(data.products || []);
-      setTotalPages(data.totalPages || 1);
+      // Backend returns { data: [...], meta: {...} }
+      setProducts(data.data || []);
+      setTotalPages(data.meta?.totalPages || 1);
     } catch (err) {
       console.error('Error loading products:', err);
     } finally {
@@ -49,16 +48,66 @@ export default function InventoryPage() {
     }
   };
 
+  useEffect(() => {
+    if (session && (session.user as any)?.role === 'admin') {
+      loadProducts();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [session, page]);
+
+  useEffect(() => {
+    // Check for toast message from sessionStorage after redirect
+    const toastMessage = sessionStorage.getItem('toastMessage');
+    const toastType = sessionStorage.getItem('toastType');
+    
+    if (toastMessage && toastType) {
+      showToast(toastMessage, toastType as 'success' | 'error' | 'info' | 'warning');
+      // Clear the stored toast
+      sessionStorage.removeItem('toastMessage');
+      sessionStorage.removeItem('toastType');
+    }
+  }, [showToast]);
+
   const handleUpdateStock = async (productId: string, newStock: number) => {
     try {
       const accessToken = (session as any)?.accessToken;
-      if (!accessToken) return;
+      if (!accessToken) {
+        console.error('No access token available');
+        return;
+      }
 
-      // TODO: Implement update stock API call
-      console.log('Update stock:', productId, newStock);
+      await productsApi.updateStock(productId, newStock, accessToken);
+      showToast(t.inventory.messages.stockUpdateSuccess, 'success');
       await loadProducts();
     } catch (err) {
       console.error('Error updating stock:', err);
+      showToast(t.inventory.messages.stockUpdateError, 'error');
+    }
+  };
+
+  const handleDeleteClick = (productId: string) => {
+    setDeleteDialog({ isOpen: true, productId });
+  };
+
+  const handleDeleteConfirm = async () => {
+    if (!deleteDialog.productId) return;
+
+    try {
+      const accessToken = (session as any)?.accessToken;
+      if (!accessToken) {
+        showToast(t.inventory.messages.noSession, 'error');
+        setDeleteDialog({ isOpen: false, productId: null });
+        return;
+      }
+
+      await productsApi.delete(deleteDialog.productId, accessToken);
+      setDeleteDialog({ isOpen: false, productId: null });
+      showToast(t.inventory.messages.deleteSuccess, 'success');
+      await loadProducts();
+    } catch (err) {
+      console.error('Error deleting product:', err);
+      showToast(t.inventory.messages.deleteError, 'error');
+      setDeleteDialog({ isOpen: false, productId: null });
     }
   };
 
@@ -147,10 +196,15 @@ export default function InventoryPage() {
                         <button
                           className={styles.editButton}
                           onClick={() => router.push(`/account/inventory/edit/${product.id}`)}
+                          title={t.inventory.actions.editTooltip}
                         >
                           ✏️
                         </button>
-                        <button className={styles.deleteButton}>
+                        <button 
+                          className={styles.deleteButton}
+                          onClick={() => handleDeleteClick(product.id)}
+                          title={t.inventory.actions.deleteTooltip}
+                        >
                           🗑️
                         </button>
                       </td>
@@ -184,6 +238,17 @@ export default function InventoryPage() {
             )}
           </>
         )}
+
+        {/* Delete Confirmation Dialog */}
+        <ConfirmDialog
+          isOpen={deleteDialog.isOpen}
+          message={t.inventory.messages.deleteConfirm}
+          confirmText={t.common.delete}
+          cancelText={t.common.cancel}
+          type="danger"
+          onConfirm={handleDeleteConfirm}
+          onCancel={() => setDeleteDialog({ isOpen: false, productId: null })}
+        />
       </div>
     </div>
   );

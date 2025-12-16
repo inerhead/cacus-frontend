@@ -7,6 +7,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useLanguage, useTranslation } from '@/contexts/LanguageContext';
 import { addressesApi, Address } from '@/lib/api/addresses';
+import { productsApi } from '@/lib/api/products';
 import styles from './account.module.css';
 
 export default function AccountPage() {
@@ -16,6 +17,7 @@ export default function AccountPage() {
   const t = useTranslation();
   const [addresses, setAddresses] = useState<Address[]>([]);
   const [loadingAddresses, setLoadingAddresses] = useState(true);
+  const [productCount, setProductCount] = useState(0);
 
   useEffect(() => {
     if (status === 'unauthenticated') {
@@ -26,6 +28,10 @@ export default function AccountPage() {
   useEffect(() => {
     if (session) {
       loadAddresses();
+      // Load product count if user is admin
+      if ((session.user as any)?.role === 'admin') {
+        loadProductCount();
+      }
     }
   }, [session]);
 
@@ -40,6 +46,16 @@ export default function AccountPage() {
       setAddresses([]);
     } finally {
       setLoadingAddresses(false);
+    }
+  };
+
+  const loadProductCount = async () => {
+    try {
+      const data = await productsApi.getAll({ page: 1, limit: 1 });
+      setProductCount(data.meta?.total || 0);
+    } catch (err: any) {
+      console.error('Error loading product count:', err);
+      setProductCount(0);
     }
   };
 
@@ -131,7 +147,7 @@ export default function AccountPage() {
                     <p className={styles.addressText}>{t.account.admin.inventoryDescription}</p>
                   </div>
                   <Link href="/account/inventory" className={styles.link}>
-                    gestionar inventario (2)
+                    gestionar inventario ({productCount})
                   </Link>
                 </div>
               </div>
