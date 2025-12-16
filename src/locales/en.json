@@ -100,6 +100,11 @@
     "orderHistory": "Order History",
     "viewOrders": "view orders ({count})",
     "noOrders": "No orders yet",
+    "admin": {
+      "title": "Administration",
+      "inventory": "Product Inventory",
+      "inventoryDescription": "Manage stock, prices and products"
+    },
     "addresses": {
       "title": "My Addresses",
       "backToAccount": "← Back to My Account",
@@ -151,6 +156,32 @@
     "gifts": "Gifts",
     "new": "New",
     "stem": "STEM"
+  },
+  "inventory": {
+    "title": "Inventory Management",
+    "addProduct": "Add Product",
+    "table": {
+      "sku": "SKU",
+      "product": "Product",
+      "price": "Price",
+      "stock": "Stock",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "status": {
+      "active": "Active",
+      "draft": "Draft",
+      "archived": "Archived"
+    },
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next",
+      "page": "Page {page} of {total}"
+    },
+    "actions": {
+      "edit": "Edit",
+      "delete": "Delete"
+    }
   },
   "product": {
     "freeShipping": "Free shipping",

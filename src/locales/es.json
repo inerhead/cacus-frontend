@@ -100,6 +100,11 @@
     "orderHistory": "Historial de pedidos",
     "viewOrders": "ver pedidos ({count})",
     "noOrders": "No tiene pedidos",
+    "admin": {
+      "title": "Administración",
+      "inventory": "Inventario de Productos",
+      "inventoryDescription": "Gestionar stock, precios y productos"
+    },
     "addresses": {
       "title": "Mis direcciones",
       "backToAccount": "← Volver a Mi cuenta",
@@ -151,6 +156,32 @@
     "gifts": "Regalos",
     "new": "Novedades",
     "stem": "STEM"
+  },
+  "inventory": {
+    "title": "Administración de Inventario",
+    "addProduct": "Agregar Producto",
+    "table": {
+      "sku": "SKU",
+      "product": "Producto",
+      "price": "Precio",
+      "stock": "Stock",
+      "status": "Estado",
+      "actions": "Acciones"
+    },
+    "status": {
+      "active": "Activo",
+      "draft": "Borrador",
+      "archived": "Archivado"
+    },
+    "pagination": {
+      "previous": "Anterior",
+      "next": "Siguiente",
+      "page": "Página {page} de {total}"
+    },
+    "actions": {
+      "edit": "Editar",
+      "delete": "Eliminar"
+    }
   },
   "product": {
     "freeShipping": "Envío gratis",

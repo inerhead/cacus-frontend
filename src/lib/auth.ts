@@ -46,7 +46,10 @@ const authConfig: NextAuthConfig = {
         }
 
         try {
-          const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/login`, {
+          // Use INTERNAL_API_URL for server-side calls (Docker), NEXT_PUBLIC_API_URL for client-side
+          const apiUrl = process.env.INTERNAL_API_URL || process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
+          
+          const res = await fetch(`${apiUrl}/auth/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -68,6 +71,7 @@ const authConfig: NextAuthConfig = {
               name: `${data.user.firstName || ''} ${data.user.lastName || ''}`.trim(),
               accessToken: data.accessToken,
               refreshToken: data.refreshToken,
+              role: data.user.role,
             };
           }
 
@@ -218,6 +222,7 @@ const authConfig: NextAuthConfig = {
                 userId: data.user.id,
                 firstName: data.user.firstName || firstName,
                 avatarUrl: avatarUrl || data.user.avatarUrl,
+                role: data.user.role || 'customer',
               };
             } else {
               console.error('Failed to get tokens from backend:', await loginResponse.text());
@@ -235,6 +240,7 @@ const authConfig: NextAuthConfig = {
           userId: user.id,
           firstName: firstName || user.firstName,
           avatarUrl: avatarUrl,
+          role: user.role || 'customer',
         };
       }
 
@@ -256,6 +262,7 @@ const authConfig: NextAuthConfig = {
       session.refreshToken = token.refreshToken as string;
       session.user.firstName = token.firstName as string;
       session.user.avatarUrl = token.avatarUrl as string;
+      session.user.role = token.role as string; // Add role to session
       // Also set image for compatibility
       if (token.avatarUrl && !session.user.image) {
         session.user.image = token.avatarUrl as string;

@@ -121,9 +121,25 @@ export default function AccountPage() {
 
           {/* Right Column - Addresses & Orders */}
           <div className={styles.column}>
+            {/* Admin Inventory Section - Only visible for admin role */}
+            {(session.user as any)?.role === 'admin' && (
+              <div className={styles.section}>
+                <h3 className={styles.sectionTitle}>🛠️ {t.account.admin.title}</h3>
+                <div className={styles.addressInfo}>
+                  <div className={styles.addressDetails}>
+                    <p className={styles.addressName}>{t.account.admin.inventory}</p>
+                    <p className={styles.addressText}>{t.account.admin.inventoryDescription}</p>
+                  </div>
+                  <Link href="/account/inventory" className={styles.link}>
+                    gestionar inventario (2)
+                  </Link>
+                </div>
+              </div>
+            )}
+
             {/* Default Address Section */}
             <div className={styles.section}>
-              <h3 className={styles.sectionTitle}>{t.account.defaultAddress}</h3>
+              <h3 className={styles.sectionTitle}>📍 {t.account.defaultAddress}</h3>
               {loadingAddresses ? (
                 <p className={styles.noData}>{t.common.loading}</p>
               ) : addresses.length > 0 && defaultAddress ? (
@@ -170,7 +186,7 @@ export default function AccountPage() {
 
             {/* Order History Section */}
             <div className={styles.section}>
-              <h3 className={styles.sectionTitle}>{t.account.orderHistory}</h3>
+              <h3 className={styles.sectionTitle}>📋 {t.account.orderHistory}</h3>
               <div className={styles.addressInfo}>
                 <p className={styles.addressName}>{session.user?.name || t.account.defaultUser}</p>
                 <Link href="/account/orders" className={styles.link}>

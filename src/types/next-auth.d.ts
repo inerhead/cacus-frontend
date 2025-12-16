@@ -12,6 +12,7 @@ declare module 'next-auth' {
       firstName?: string;
       image?: string;
       avatarUrl?: string;
+      role?: string;
     };
   }
 
@@ -24,6 +25,7 @@ declare module 'next-auth' {
     avatarUrl?: string;
     accessToken?: string;
     refreshToken?: string;
+    role?: string;
   }
 }
 
@@ -34,5 +36,6 @@ declare module 'next-auth/jwt' {
     userId?: string;
     firstName?: string;
     avatarUrl?: string;
+    role?: string;
   }
 }
