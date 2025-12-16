@@ -27,6 +27,55 @@
   gap: 1.5rem;
 }
 
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.filterGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.filterLabel {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+  text-transform: uppercase;
+}
+
+.filterSelect {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: 2px solid #000;
+  background: #fff;
+  color: #000;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 200px;
+}
+
+.filterSelect:hover {
+  border-color: #FFEB3B;
+}
+
+.filterSelect:focus {
+  outline: none;
+  border-color: #FFEB3B;
+  box-shadow: 0 0 0 3px rgba(255, 235, 59, 0.2);
+}
+
+.actionsBar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #f3f4f6;
+}
+
 .headerActions {
   display: flex;
   align-items: center;

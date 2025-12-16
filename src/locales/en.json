@@ -166,6 +166,12 @@
     "editProduct": "Edit Product",
     "newProduct": "Add New Product",
     "backToInventory": "← Back to inventory",
+    "filterByStatus": "Status:",
+    "statusFilter": {
+      "all": "All",
+      "active": "Active",
+      "inactive": "Inactive (Draft/Archived)"
+    },
     "table": {
       "sku": "SKU",
       "product": "Product",

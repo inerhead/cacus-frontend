@@ -162,6 +162,62 @@ class ProductsAPI {
       },
     });
   }
+
+  // ==================== IMAGE METHODS ====================
+
+  async uploadImage(productId: string, file: File, altText?: string, token?: string): Promise<any> {
+    const formData = new FormData();
+    formData.append('image', file);
+    if (altText) {
+      formData.append('altText', altText);
+    }
+
+    const response = await fetch(`${this.baseURL}/${productId}/images`, {
+      method: 'POST',
+      headers: {
+        'Authorization': token ? `Bearer ${token}` : '',
+      },
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    return response.json();
+  }
+
+  async getImages(productId: string): Promise<any[]> {
+    return this.request<any[]>(`${this.baseURL}/${productId}/images`);
+  }
+
+  async updateImage(imageId: string, data: { altText?: string; sortOrder?: number; isPrimary?: boolean }, token?: string): Promise<any> {
+    return this.request<any>(`${API_URL}/products/images/${imageId}`, {
+      method: 'PATCH',
+      headers: {
+        'Authorization': token ? `Bearer ${token}` : '',
+      },
+      body: JSON.stringify(data),
+    });
+  }
+
+  async setPrimaryImage(imageId: string, token?: string): Promise<any> {
+    return this.request<any>(`${API_URL}/products/images/${imageId}/primary`, {
+      method: 'PATCH',
+      headers: {
+        'Authorization': token ? `Bearer ${token}` : '',
+      },
+    });
+  }
+
+  async deleteImage(imageId: string, token?: string): Promise<void> {
+    await this.request<void>(`${API_URL}/products/images/${imageId}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': token ? `Bearer ${token}` : '',
+      },
+    });
+  }
 }
 
 export const productsAPI = new ProductsAPI();

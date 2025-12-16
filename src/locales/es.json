@@ -168,6 +168,12 @@
     "editProduct": "Editar Producto",
     "newProduct": "Agregar Nuevo Producto",
     "backToInventory": "← Volver al inventario",
+    "filterByStatus": "Estado:",
+    "statusFilter": {
+      "all": "Todos",
+      "active": "Activos",
+      "inactive": "Inactivos (Draft/Archived)"
+    },
     "table": {
       "sku": "SKU",
       "product": "Producto",

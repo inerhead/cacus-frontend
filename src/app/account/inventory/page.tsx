@@ -20,6 +20,7 @@ export default function InventoryPage() {
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [statusFilter, setStatusFilter] = useState<string>('all');
   const [deleteDialog, setDeleteDialog] = useState<{ isOpen: boolean; productId: string | null }>({ isOpen: false, productId: null });
   const [importing, setImporting] = useState(false);
   const fileInputRef = React.useRef<HTMLInputElement>(null);
@@ -41,7 +42,17 @@ export default function InventoryPage() {
   const loadProducts = async () => {
     try {
       setLoading(true);
-      const data = await productsApi.getAll({ page, limit: 20, active: undefined });
+      const queryParams: any = { page, limit: 20 };
+      
+      // Apply status filter
+      if (statusFilter === 'active') {
+        queryParams.status = 'active';
+      } else if (statusFilter === 'inactive') {
+        queryParams.status = 'inactive';
+      }
+      // Don't add 'status' param when statusFilter === 'all'
+      
+      const data = await productsApi.getAll(queryParams);
       // Backend returns { data: [...], meta: {...} }
       setProducts(data.data || []);
       setTotalPages(data.meta?.totalPages || 1);
@@ -57,7 +68,7 @@ export default function InventoryPage() {
       loadProducts();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [session, page]);
+  }, [session, page, statusFilter]);
 
   useEffect(() => {
     // Check for toast message from sessionStorage after redirect
@@ -180,11 +191,11 @@ export default function InventoryPage() {
   };
 
   const handleDownloadTemplate = () => {
-    // Create template data
+    // Create template data with ImageURLs column
     const template = [
-      ['SKU*', 'Name*', 'Price*', 'Stock*', 'ShortDescription', 'LongDescription', 'CompareAtPrice', 'Brand', 'Material', 'Status', 'Featured', 'New', 'AllowBackorder'],
-      ['EXAMPLE-001', 'Producto de Ejemplo', '99900', '10', 'Descripción corta', 'Descripción larga del producto', '129900', 'Marca Ejemplo', 'Madera', 'active', 'true', 'false', 'false'],
-      ['EXAMPLE-002', 'Otro Producto', '149900', '5', 'Otra descripción', 'Descripción detallada', '', 'Otra Marca', 'Plástico', 'draft', 'false', 'true', 'false'],
+      ['SKU*', 'Name*', 'Price*', 'Stock*', 'ShortDescription', 'LongDescription', 'CompareAtPrice', 'Brand', 'Material', 'Status', 'Featured', 'New', 'AllowBackorder', 'ImageURLs'],
+      ['EXAMPLE-001', 'Producto de Ejemplo', '99900', '10', 'Descripción corta', 'Descripción larga del producto', '129900', 'Marca Ejemplo', 'Madera', 'active', 'true', 'false', 'false', 'https://example.com/image1.jpg,https://example.com/image2.jpg'],
+      ['EXAMPLE-002', 'Otro Producto', '149900', '5', 'Otra descripción', 'Descripción detallada', '', 'Otra Marca', 'Plástico', 'draft', 'false', 'true', 'false', 'https://example.com/image3.jpg'],
     ];
 
     // Convert to CSV
@@ -227,6 +238,26 @@ export default function InventoryPage() {
             </Button>
             <h1 className={styles.title}>{t.inventory.title}</h1>
           </div>
+          <div className={styles.headerRight}>
+            <div className={styles.filterGroup}>
+              <label className={styles.filterLabel}>{t.inventory.filterByStatus || 'Estado:'}</label>
+              <select 
+                className={styles.filterSelect}
+                value={statusFilter}
+                onChange={(e) => {
+                  setStatusFilter(e.target.value);
+                  setPage(1);
+                }}
+              >
+                <option value="all">{t.inventory.statusFilter?.all || 'Todos'}</option>
+                <option value="active">{t.inventory.statusFilter?.active || 'Activos'}</option>
+                <option value="inactive">{t.inventory.statusFilter?.inactive || 'Inactivos'}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        
+        <div className={styles.actionsBar}>
           <div className={styles.headerActions}>
             <Button 
               variant="secondary"

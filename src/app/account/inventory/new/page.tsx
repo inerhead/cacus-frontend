@@ -7,6 +7,7 @@ import { useTranslation } from '@/contexts/LanguageContext';
 import { useToastContext } from '@/contexts/ToastContext';
 import { productsApi } from '@/lib/api/products';
 import Button from '@/components/ui/Button';
+import ImageUpload, { ProductImage } from '@/components/products/ImageUpload';
 import styles from './new-product.module.css';
 
 interface Category {
@@ -40,6 +41,7 @@ export default function NewProductPage() {
   
   const [categories, setCategories] = useState<Category[]>([]);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [images, setImages] = useState<ProductImage[]>([]);
   const [loading, setLoading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
@@ -409,6 +411,19 @@ export default function NewProductPage() {
                 <span>{t.inventory.form.allowBackorder}</span>
               </label>
             </div>
+          </div>
+
+          <div className={styles.section}>
+            <h2 className={styles.sectionTitle}>Imágenes del Producto</h2>
+            <p className={styles.sectionHint}>
+              Las imágenes se pueden subir después de crear el producto. Si deseas agregar imágenes ahora, usa la columna ImageURLs en la importación por Excel.
+            </p>
+            <ImageUpload
+              images={images}
+              onChange={setImages}
+              disabled={true}
+              maxImages={5}
+            />
           </div>
 
           <div className={styles.formActions}>
