@@ -8,6 +8,7 @@ import Image from 'next/image';
 import { useLanguage, useTranslation } from '@/contexts/LanguageContext';
 import { addressesApi, Address } from '@/lib/api/addresses';
 import { productsApi } from '@/lib/api/products';
+import Button from '@/components/ui/Button';
 import styles from './account.module.css';
 
 export default function AccountPage() {
@@ -87,9 +88,13 @@ export default function AccountPage() {
         {/* Header Section */}
         <div className={styles.header}>
           <h1 className={styles.title}>{t.account.title}</h1>
-          <button onClick={handleSignOut} className={styles.signOutButton}>
+          <Button 
+            variant="danger" 
+            size="medium" 
+            onClick={handleSignOut}
+          >
             {t.account.signOut}
-          </button>
+          </Button>
         </div>
 
         {/* Two Column Layout */}

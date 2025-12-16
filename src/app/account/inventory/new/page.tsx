@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from '@/contexts/LanguageContext';
 import { useToastContext } from '@/contexts/ToastContext';
 import { productsApi } from '@/lib/api/products';
+import Button from '@/components/ui/Button';
 import styles from './new-product.module.css';
 
 interface Category {
@@ -166,13 +167,14 @@ export default function NewProductPage() {
       <div className={styles.content}>
         <div className={styles.header}>
           <h1 className={styles.title}>{t.inventory.newProduct}</h1>
-          <button 
-            className={styles.backButton}
+          <Button 
+            variant="primary"
+            size="medium"
             onClick={() => router.push('/account/inventory')}
             type="button"
           >
-            {t.inventory.backToInventory}
-          </button>
+            ← {t.inventory.backToInventory}
+          </Button>
         </div>
 
         <form onSubmit={handleSubmit} className={styles.form}>
@@ -410,21 +412,24 @@ export default function NewProductPage() {
           </div>
 
           <div className={styles.formActions}>
-            <button
+            <Button
               type="button"
+              variant="ghost"
+              size="medium"
               onClick={() => router.push('/account/inventory')}
-              className={styles.cancelButton}
               disabled={submitting}
             >
               {t.inventory.form.cancel}
-            </button>
-            <button
+            </Button>
+            <Button
               type="submit"
-              className={styles.submitButton}
+              variant="primary"
+              size="medium"
+              loading={submitting}
               disabled={submitting}
             >
               {submitting ? t.inventory.form.creating : t.inventory.form.create}
-            </button>
+            </Button>
           </div>
         </form>
       </div>

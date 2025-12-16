@@ -7,6 +7,8 @@ import { useTranslation } from '@/contexts/LanguageContext';
 import { useToastContext } from '@/contexts/ToastContext';
 import { productsApi, Product } from '@/lib/api/products';
 import ConfirmDialog from '@/components/ui/ConfirmDialog';
+import Button from '@/components/ui/Button';
+import { EditIcon, DeleteIcon } from '@/components/ui/icons';
 import styles from './inventory.module.css';
 
 export default function InventoryPage() {
@@ -128,13 +130,23 @@ export default function InventoryPage() {
     <div className={styles.container}>
       <div className={styles.content}>
         <div className={styles.header}>
-          <h1 className={styles.title}>{t.inventory.title}</h1>
-          <button 
-            className={styles.addButton}
+          <div className={styles.headerLeft}>
+            <Button 
+              variant="ghost"
+              size="small"
+              onClick={() => router.push('/account')}
+            >
+              ← {t.account.backToProfile || 'Volver al Perfil'}
+            </Button>
+            <h1 className={styles.title}>{t.inventory.title}</h1>
+          </div>
+          <Button 
+            variant="primary"
+            size="medium"
             onClick={() => router.push('/account/inventory/new')}
           >
             + {t.inventory.addProduct}
-          </button>
+          </Button>
         </div>
 
         {loading ? (
@@ -193,20 +205,22 @@ export default function InventoryPage() {
                         </span>
                       </td>
                       <td className={styles.actions}>
-                        <button
-                          className={styles.editButton}
+                        <Button
+                          variant="secondary"
+                          size="icon"
                           onClick={() => router.push(`/account/inventory/edit/${product.id}`)}
                           title={t.inventory.actions.editTooltip}
                         >
-                          ✏️
-                        </button>
-                        <button 
-                          className={styles.deleteButton}
+                          <EditIcon size={18} />
+                        </Button>
+                        <Button 
+                          variant="danger"
+                          size="icon"
                           onClick={() => handleDeleteClick(product.id)}
                           title={t.inventory.actions.deleteTooltip}
                         >
-                          🗑️
-                        </button>
+                          <DeleteIcon size={18} />
+                        </Button>
                       </td>
                     </tr>
                   ))}
@@ -217,23 +231,25 @@ export default function InventoryPage() {
             {/* Pagination */}
             {totalPages > 1 && (
               <div className={styles.pagination}>
-                <button
+                <Button
+                  variant="ghost"
+                  size="medium"
                   disabled={page === 1}
                   onClick={() => setPage(page - 1)}
-                  className={styles.paginationButton}
                 >
                   ← {t.inventory.pagination.previous}
-                </button>
+                </Button>
                 <span className={styles.pageInfo}>
                   {t.inventory.pagination.page.replace('{page}', page.toString()).replace('{total}', totalPages.toString())}
                 </span>
-                <button
+                <Button
+                  variant="ghost"
+                  size="medium"
                   disabled={page === totalPages}
                   onClick={() => setPage(page + 1)}
-                  className={styles.paginationButton}
                 >
                   {t.inventory.pagination.next} →
-                </button>
+                </Button>
               </div>
             )}
           </>

@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from '@/contexts/LanguageContext';
 import { useToastContext } from '@/contexts/ToastContext';
 import { productsApi, Product } from '@/lib/api/products';
+import Button from '@/components/ui/Button';
 import styles from '../edit-product.module.css';
 
 export default function EditProductPage() {
@@ -162,13 +163,14 @@ export default function EditProductPage() {
       <div className={styles.content}>
         <div className={styles.header}>
           <h1 className={styles.title}>{t.inventory.editProduct}</h1>
-          <button 
-            className={styles.backButton}
+          <Button 
+            variant="primary"
+            size="medium"
             onClick={() => router.push('/account/inventory')}
             type="button"
           >
-            {t.inventory.backToInventory}
-          </button>
+            ← {t.inventory.backToInventory}
+          </Button>
         </div>
 
         <form onSubmit={handleSubmit} className={styles.form}>
@@ -386,21 +388,24 @@ export default function EditProductPage() {
           </div>
 
           <div className={styles.formActions}>
-            <button
+            <Button
               type="button"
+              variant="ghost"
+              size="medium"
               onClick={() => router.push('/account/inventory')}
-              className={styles.cancelButton}
               disabled={submitting}
             >
               {t.inventory.form.cancel}
-            </button>
-            <button
+            </Button>
+            <Button
               type="submit"
-              className={styles.submitButton}
+              variant="primary"
+              size="medium"
+              loading={submitting}
               disabled={submitting}
             >
               {submitting ? t.inventory.form.saving : t.inventory.form.save}
-            </button>
+            </Button>
           </div>
         </form>
       </div>

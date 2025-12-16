@@ -1,47 +1,69 @@
-import { ButtonHTMLAttributes, ReactNode } from 'react';
-import { cn } from '@/lib/utils';
+'use client';
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'black' | 'outline';
-  size?: 'sm' | 'md' | 'lg';
-  children: ReactNode;
+import { ButtonHTMLAttributes, ReactNode, forwardRef } from 'react';
+import styles from './Button.module.css';
+
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: 'primary' | 'danger' | 'secondary' | 'black' | 'ghost';
+  size?: 'small' | 'medium' | 'large' | 'icon';
+  loading?: boolean;
+  icon?: ReactNode;
+  fullWidth?: boolean;
+  children?: ReactNode;
 }
 
-export default function Button({
-  variant = 'primary',
-  size = 'md',
-  className,
-  children,
-  ...props
-}: ButtonProps) {
-  const baseStyles = 'font-bold uppercase tracking-wide transition-all duration-200 active:scale-95';
-  
-  const variants = {
-    primary: 'bg-lego-yellow text-black hover:bg-lego-yellow-dark',
-    secondary: 'bg-lego-blue text-white hover:bg-lego-blue-light',
-    black: 'bg-black text-white hover:bg-lego-gray-darker',
-    outline: 'border-2 border-black text-black hover:bg-black hover:text-white',
-  };
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    {
+      variant = 'primary',
+      size = 'medium',
+      loading = false,
+      icon,
+      fullWidth = false,
+      disabled,
+      className = '',
+      children,
+      ...props
+    },
+    ref
+  ) => {
+    const buttonClasses = [
+      styles.legoButton,
+      styles[variant],
+      styles[size],
+      fullWidth && styles.fullWidth,
+      loading && styles.loading,
+      className,
+    ]
+      .filter(Boolean)
+      .join(' ');
 
-  const sizes = {
-    sm: 'py-2 px-4 text-sm',
-    md: 'py-3 px-6 text-base',
-    lg: 'py-4 px-8 text-lg',
-  };
+    return (
+      <button
+        ref={ref}
+        className={buttonClasses}
+        disabled={disabled || loading}
+        {...props}
+      >
+        {loading && (
+          <span className={styles.spinner}>
+            <span className={styles.brick}></span>
+          </span>
+        )}
+        {!loading && size === 'icon' ? (
+          children
+        ) : (
+          <>
+            {!loading && icon && <span className={styles.icon}>{icon}</span>}
+            {children && <span className={styles.text}>{children}</span>}
+          </>
+        )}
+      </button>
+    );
+  }
+);
 
-  return (
-    <button
-      className={cn(
-        baseStyles,
-        variants[variant],
-        sizes[size],
-        'rounded-none',
-        className
-      )}
-      {...props}
-    >
-      {children}
-    </button>
-  );
-}
+Button.displayName = 'Button';
+
+export default Button;
 

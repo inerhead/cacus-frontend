@@ -92,6 +92,7 @@
   "account": {
     "title": "Mi cuenta",
     "signOut": "Cerrar sesión",
+    "backToProfile": "Volver al Perfil",
     "defaultUser": "Usuario",
     "language": "Idioma / Language",
     "defaultAddress": "Dirección predeterminada",
@@ -107,7 +108,7 @@
     },
     "addresses": {
       "title": "Mis direcciones",
-      "backToAccount": "← Volver a Mi cuenta",
+      "backToAccount": "Volver al Perfil",
       "noAddresses": "No tienes direcciones guardadas",
       "addNew": "Agregar nueva dirección",
       "edit": "Editar",

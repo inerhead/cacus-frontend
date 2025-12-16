@@ -91,8 +91,7 @@
   },
   "account": {
     "title": "My Account",
-    "signOut": "Sign Out",
-    "defaultUser": "User",
+    "signOut": "Sign Out",    "backToProfile": "Back to Profile",    "defaultUser": "User",
     "language": "Language / Idioma",
     "defaultAddress": "Default Address",
     "viewAddresses": "view addresses ({count})",
@@ -107,7 +106,7 @@
     },
     "addresses": {
       "title": "My Addresses",
-      "backToAccount": "← Back to My Account",
+      "backToAccount": "Back to Profile",
       "noAddresses": "You have no saved addresses",
       "addNew": "Add new address",
       "edit": "Edit",

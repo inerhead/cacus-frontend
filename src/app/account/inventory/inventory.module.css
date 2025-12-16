@@ -21,8 +21,14 @@
   border-bottom: 2px solid #f3f4f6;
 }
 
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
 .title {
-  font-size: 1.875rem;
+  font-size: 1.5rem;
   font-weight: bold;
   color: #111827;
   margin: 0;

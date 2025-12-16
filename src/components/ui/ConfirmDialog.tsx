@@ -1,6 +1,7 @@
 'use client';
 
 import { useTranslation } from '@/contexts/LanguageContext';
+import Button from './Button';
 import styles from './ConfirmDialog.module.css';
 
 interface ConfirmDialogProps {
@@ -28,6 +29,12 @@ export default function ConfirmDialog({
 
   if (!isOpen) return null;
 
+  const variantMap = {
+    danger: 'danger' as const,
+    warning: 'primary' as const,
+    info: 'secondary' as const,
+  };
+
   return (
     <div className={styles.overlay} onClick={onCancel}>
       <div className={styles.dialog} onClick={(e) => e.stopPropagation()}>
@@ -40,18 +47,20 @@ export default function ConfirmDialog({
           <p className={styles.message}>{message}</p>
         </div>
         <div className={styles.footer}>
-          <button
-            className={styles.cancelButton}
+          <Button
+            variant="ghost"
+            size="medium"
             onClick={onCancel}
           >
             {cancelText || t.common.cancel}
-          </button>
-          <button
-            className={`${styles.confirmButton} ${styles[type]}`}
+          </Button>
+          <Button
+            variant={variantMap[type]}
+            size="medium"
             onClick={onConfirm}
           >
             {confirmText || t.common.confirm}
-          </button>
+          </Button>
         </div>
       </div>
     </div>

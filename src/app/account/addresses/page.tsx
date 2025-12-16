@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { useTranslation } from '@/contexts/LanguageContext';
 import { addressesApi, Address, CreateAddressData, UpdateAddressData } from '@/lib/api/addresses';
 import AddressForm from '@/components/addresses/AddressForm';
+import Button from '@/components/ui/Button';
 import ConfirmDialog from '@/components/ui/ConfirmDialog';
 import ToastContainer from '@/components/ui/ToastContainer';
 import { useToast } from '@/hooks/useToast';
@@ -161,9 +162,13 @@ export default function AddressesPage() {
     <div className={styles.container}>
       <div className={styles.content}>
         <div className={styles.header}>
-          <Link href="/account" className={styles.backLink}>
+          <Button 
+            variant="ghost"
+            size="small"
+            onClick={() => router.push('/account')}
+          >
             {t.account.addresses.backToAccount}
-          </Link>
+          </Button>
           <h1 className={styles.title}>{t.account.addresses.title}</h1>
         </div>
 
@@ -187,9 +192,13 @@ export default function AddressesPage() {
                   <p className={styles.emptyMessage}>
                     {t.account.addresses.noAddresses}
                   </p>
-                  <button className={styles.addButton} onClick={handleAddNew}>
-                    {t.account.addresses.addNew}
-                  </button>
+                  <Button 
+                    variant="primary" 
+                    size="medium" 
+                    onClick={handleAddNew}
+                  >
+                    + {t.account.addresses.addNew}
+                  </Button>
                 </div>
               </div>
             ) : (
@@ -199,9 +208,13 @@ export default function AddressesPage() {
                     <h2 className={styles.addressesTitle}>
                       {t.account.addresses.title} ({addresses.length})
                     </h2>
-                    <button className={styles.addButton} onClick={handleAddNew}>
-                      {t.account.addresses.addNew}
-                    </button>
+                    <Button 
+                      variant="primary" 
+                      size="medium" 
+                      onClick={handleAddNew}
+                    >
+                      + {t.account.addresses.addNew}
+                    </Button>
                   </div>
 
                   <div className={styles.addressesList}>

@@ -1,0 +1,381 @@
+/* LEGO Brick Button System */
+.legoButton {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: inherit;
+  font-weight: 700;
+  text-transform: uppercase;
+  border: 3px solid #000;
+  cursor: pointer;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+  white-space: nowrap;
+  user-select: none;
+  overflow: hidden;
+  
+  /* Efecto 3D LEGO */
+  box-shadow: 
+    0 4px 0 rgba(0, 0, 0, 0.25),
+    0 6px 12px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* LEGO Studs Effect (sutil) */
+.legoButton::before {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 85%;
+  height: 6px;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.15) 35%,
+    transparent 35%
+  );
+  background-size: 14px 14px;
+  background-repeat: repeat-x;
+  background-position: center;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* Ripple Effect Container */
+.legoButton::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.legoButton:active::after {
+  width: 300px;
+  height: 300px;
+  transition: 0s;
+}
+
+/* Hover State */
+.legoButton:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 
+    0 6px 0 rgba(0, 0, 0, 0.25),
+    0 10px 20px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* Active State (pressed) */
+.legoButton:active:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow: 
+    0 2px 0 rgba(0, 0, 0, 0.25),
+    0 3px 6px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Disabled State */
+.legoButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 
+    0 2px 0 rgba(0, 0, 0, 0.15),
+    0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* ========== VARIANTS ========== */
+
+/* Primary - Amarillo LEGO */
+.primary {
+  background: linear-gradient(180deg, #FFEB3B 0%, #FDD835 100%);
+  color: #000;
+  border-color: #000;
+}
+
+.primary:hover:not(:disabled) {
+  background: linear-gradient(180deg, #FFF176 0%, #FFEB3B 100%);
+}
+
+.primary:active:not(:disabled) {
+  background: linear-gradient(180deg, #FDD835 0%, #F9A825 100%);
+}
+
+/* Danger - Rojo LEGO */
+.danger {
+  background: linear-gradient(180deg, #E60012 0%, #C5000F 100%);
+  color: #fff;
+  border-color: #000;
+}
+
+.danger::before {
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.2) 35%,
+    transparent 35%
+  );
+}
+
+.danger:hover:not(:disabled) {
+  background: linear-gradient(180deg, #FF1744 0%, #E60012 100%);
+}
+
+.danger:active:not(:disabled) {
+  background: linear-gradient(180deg, #C5000F 0%, #A30000 100%);
+}
+
+/* Secondary - Azul LEGO */
+.secondary {
+  background: linear-gradient(180deg, #0066CC 0%, #0052A3 100%);
+  color: #fff;
+  border-color: #000;
+}
+
+.secondary::before {
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.2) 35%,
+    transparent 35%
+  );
+}
+
+.secondary:hover:not(:disabled) {
+  background: linear-gradient(180deg, #2196F3 0%, #0066CC 100%);
+}
+
+.secondary:active:not(:disabled) {
+  background: linear-gradient(180deg, #0052A3 0%, #003D7A 100%);
+}
+
+/* Black - Negro LEGO */
+.black {
+  background: linear-gradient(180deg, #212121 0%, #000 100%);
+  color: #fff;
+  border-color: #000;
+}
+
+.black::before {
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.15) 35%,
+    transparent 35%
+  );
+}
+
+.black:hover:not(:disabled) {
+  background: linear-gradient(180deg, #424242 0%, #212121 100%);
+}
+
+.black:active:not(:disabled) {
+  background: linear-gradient(180deg, #000 0%, #000 100%);
+}
+
+/* Ghost - Outline */
+.ghost {
+  background: transparent;
+  color: #000;
+  border-color: #000;
+  box-shadow: none;
+}
+
+.ghost::before {
+  display: none;
+}
+
+.ghost:hover:not(:disabled) {
+  background: rgba(0, 0, 0, 0.05);
+  box-shadow: none;
+  transform: translateY(-2px);
+}
+
+.ghost:active:not(:disabled) {
+  background: rgba(0, 0, 0, 0.1);
+  box-shadow: none;
+  transform: translateY(0);
+}
+
+/* ========== SIZES ========== */
+
+.small {
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
+  border-width: 2px;
+}
+
+.small::before {
+  height: 4px;
+  background-size: 10px 10px;
+}
+
+.medium {
+  padding: 0.75rem 1.5rem;
+  font-size: 0.875rem;
+}
+
+.large {
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  border-width: 4px;
+}
+
+.large::before {
+  height: 8px;
+  background-size: 16px 16px;
+}
+
+.icon {
+  padding: 0.625rem;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  font-size: 1.25rem;
+}
+
+.icon::before {
+  display: none;
+}
+
+.icon .text {
+  display: none;
+}
+
+/* ========== STATES ========== */
+
+/* Loading State */
+.loading {
+  pointer-events: none;
+  position: relative;
+}
+
+.loading .text,
+.loading .icon {
+  opacity: 0;
+}
+
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* LEGO Brick Spinner Animation */
+.brick {
+  width: 20px;
+  height: 20px;
+  background: currentColor;
+  position: relative;
+  animation: legoSpin 0.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.brick::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  background: currentColor;
+  border-radius: 50%;
+  box-shadow: -7px 0 0 currentColor, 7px 0 0 currentColor;
+}
+
+@keyframes legoSpin {
+  0%, 100% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(0.8);
+  }
+}
+
+/* Full Width */
+.fullWidth {
+  width: 100%;
+}
+
+/* Icon + Text Layout */
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.text {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+  position: relative;
+  z-index: 1;
+}
+
+/* ========== RESPONSIVE ========== */
+
+@media (max-width: 768px) {
+  .legoButton {
+    font-size: 0.8125rem;
+  }
+
+  .small {
+    padding: 0.4rem 0.875rem;
+    font-size: 0.6875rem;
+  }
+
+  .medium {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.8125rem;
+  }
+
+  .large {
+    padding: 0.875rem 1.75rem;
+    font-size: 0.9375rem;
+  }
+  
+  .icon {
+    min-width: 2.5rem;
+    min-height: 2.5rem;
+  }
+}
+
+/* ========== FOCUS (Accessibility) ========== */
+
+.legoButton:focus-visible {
+  outline: 3px solid #FFEB3B;
+  outline-offset: 3px;
+}
+
+.danger:focus-visible {
+  outline-color: #E60012;
+}
+
+.secondary:focus-visible {
+  outline-color: #0066CC;
+}
+
+.black:focus-visible {
+  outline-color: #424242;
+}
+
+.ghost:focus-visible {
+  outline-color: #000;
+}
