@@ -6,6 +6,7 @@ import { Search, User, ShoppingBag, ChevronDown } from 'lucide-react';
 import { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { useTranslation } from '@/contexts/LanguageContext';
+import { AdminBadge } from '@/components/ui/AdminBadge';
 import styles from './Header.module.css';
 
 export default function Header() {
@@ -61,13 +62,20 @@ export default function Header() {
                     aria-label={session ? t.header.myAccount : t.header.login}
                   >
                     {session?.user?.avatarUrl || session?.user?.image ? (
-                      <Image
-                        src={session.user.avatarUrl || session.user.image || ''}
-                        alt={session.user.name || 'User avatar'}
-                        width={28}
-                        height={28}
-                        className={styles.userAvatar}
-                      />
+                      <div className={styles.avatarContainer}>
+                        <Image
+                          src={session.user.avatarUrl || session.user.image || ''}
+                          alt={session.user.name || 'User avatar'}
+                          width={28}
+                          height={28}
+                          className={styles.userAvatar}
+                        />
+                        {(session.user as any)?.role === 'admin' && (
+                          <div className={styles.adminBadge}>
+                            <AdminBadge size={16} />
+                          </div>
+                        )}
+                      </div>
                     ) : (
                       <User size={22} />
                     )}
@@ -75,6 +83,9 @@ export default function Header() {
                   {session?.user?.firstName && (
                     <span className={styles.userFirstName} title={session.user.email}>
                       {session.user.firstName}
+                      {(session.user as any)?.role === 'admin' && (
+                        <AdminBadge size={14} className={styles.adminBadgeInline} />
+                      )}
                     </span>
                   )}
                 </div>
