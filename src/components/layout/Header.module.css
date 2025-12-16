@@ -112,7 +112,7 @@
 
 .userIcons {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 1rem;
   padding-top: 0.5rem;
 }
@@ -122,8 +122,6 @@
   flex-direction: column;
   align-items: center;
   gap: 0.25rem;
-  min-height: 50px;
-  min-width: 80px;
   position: relative;
 }
 
@@ -137,7 +135,8 @@
   white-space: nowrap;
   line-height: 1;
   position: absolute;
-  margin-top: 28px;
+  top: 100%;
+  margin-top: 0.25rem;
 }
 
 .userFirstName {
@@ -150,7 +149,9 @@
   white-space: nowrap;
   line-height: 1;
   position: absolute;
-  margin-top: 28px;
+  top: 100%;
+  margin-top: 0.25rem;
+  text-transform: capitalize;
 }
 
 .iconLink {

@@ -1,34 +1,38 @@
 .formContainer {
   background-color: #ffffff;
-  padding: 2rem;
+  padding: 1.5rem;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .formTitle {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 700;
   color: #000;
-  margin: 0 0 1.5rem 0;
+  margin: 0 0 1rem 0;
 }
 
 .form {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 0.875rem;
 }
 
 .formGroup {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.25rem;
 }
 
 .formRow {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1rem;
+  gap: 0.875rem;
+}
+
+.checkboxRow {
+  margin-top: 0.25rem;
 }
 
 .label {
@@ -42,10 +46,10 @@
 }
 
 .input {
-  padding: 0.75rem;
+  padding: 0.625rem 0.75rem;
   border: 2px solid #d1d1d1;
   border-radius: 4px;
-  font-size: 0.938rem;
+  font-size: 0.875rem;
   color: #111111;
   transition: border-color 0.2s ease;
   font-family: inherit;
@@ -58,6 +62,12 @@
 
 .inputError {
   border-color: #d5122a;
+}
+
+.inputDisabled {
+  background-color: #f5f5f5;
+  color: #666666;
+  cursor: not-allowed;
 }
 
 .errorMessage {
@@ -84,16 +94,16 @@
 
 .formActions {
   display: flex;
-  gap: 1rem;
+  gap: 0.75rem;
   justify-content: flex-end;
-  margin-top: 1rem;
-  padding-top: 1.5rem;
+  margin-top: 0.5rem;
+  padding-top: 1rem;
   border-top: 1px solid #e5e5e5;
 }
 
 .cancelButton {
-  padding: 0.75rem 1.5rem;
-  font-size: 0.875rem;
+  padding: 0.625rem 1.25rem;
+  font-size: 0.813rem;
   font-weight: 600;
   color: #111111;
   background-color: #ffffff;
@@ -114,10 +124,10 @@
 }
 
 .submitButton {
-  padding: 0.75rem 1.5rem;
-  font-size: 0.875rem;
+  padding: 0.625rem 1.25rem;
+  font-size: 0.813rem;
   font-weight: 700;
-  color: #ffffff;
+  color: #000000;
   background-color: #ffcf00;
   border: 2px solid #ffcf00;
   border-radius: 4px;

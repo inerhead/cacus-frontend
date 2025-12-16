@@ -31,6 +31,9 @@ export default function AddressForm({ address, onSubmit, onCancel }: AddressForm
   const validate = (): boolean => {
     const newErrors: Record<string, string> = {};
 
+    if (!formData.fullName?.trim()) {
+      newErrors.fullName = t.account.addresses.form.required;
+    }
     if (!formData.addressLine1?.trim()) {
       newErrors.addressLine1 = t.account.addresses.form.required;
     }
@@ -81,52 +84,77 @@ export default function AddressForm({ address, onSubmit, onCancel }: AddressForm
       </h2>
       
       <form onSubmit={handleSubmit} className={styles.form}>
-        <div className={styles.formGroup}>
-          <label htmlFor="fullName" className={styles.label}>
-            {t.account.addresses.form.fullName}
-          </label>
-          <input
-            type="text"
-            id="fullName"
-            value={formData.fullName}
-            onChange={(e) => handleChange('fullName', e.target.value)}
-            placeholder={t.account.addresses.form.fullNamePlaceholder}
-            className={styles.input}
-          />
+        {/* Row 1: Full Name + Phone */}
+        <div className={styles.formRow}>
+          <div className={styles.formGroup}>
+            <label htmlFor="fullName" className={styles.label}>
+              {t.account.addresses.form.fullName} <span className={styles.required}>*</span>
+            </label>
+            <input
+              type="text"
+              id="fullName"
+              value={formData.fullName}
+              onChange={(e) => handleChange('fullName', e.target.value)}
+              placeholder={t.account.addresses.form.fullNamePlaceholder}
+              className={`${styles.input} ${errors.fullName ? styles.inputError : ''}`}
+              required
+            />
+            {errors.fullName && (
+              <span className={styles.errorMessage}>{errors.fullName}</span>
+            )}
+          </div>
+
+          <div className={styles.formGroup}>
+            <label htmlFor="phone" className={styles.label}>
+              {t.account.addresses.form.phone}
+            </label>
+            <input
+              type="tel"
+              id="phone"
+              value={formData.phone}
+              onChange={(e) => handleChange('phone', e.target.value)}
+              placeholder={t.account.addresses.form.phonePlaceholder}
+              className={styles.input}
+            />
+          </div>
         </div>
 
-        <div className={styles.formGroup}>
-          <label htmlFor="addressLine1" className={styles.label}>
-            {t.account.addresses.form.addressLine1} <span className={styles.required}>*</span>
-          </label>
-          <input
-            type="text"
-            id="addressLine1"
-            value={formData.addressLine1}
-            onChange={(e) => handleChange('addressLine1', e.target.value)}
-            placeholder={t.account.addresses.form.addressLine1Placeholder}
-            className={`${styles.input} ${errors.addressLine1 ? styles.inputError : ''}`}
-            required
-          />
-          {errors.addressLine1 && (
-            <span className={styles.errorMessage}>{errors.addressLine1}</span>
-          )}
+        {/* Row 2: Address Line 1 + Address Line 2 */}
+        <div className={styles.formRow}>
+          <div className={styles.formGroup}>
+            <label htmlFor="addressLine1" className={styles.label}>
+              {t.account.addresses.form.addressLine1} <span className={styles.required}>*</span>
+            </label>
+            <input
+              type="text"
+              id="addressLine1"
+              value={formData.addressLine1}
+              onChange={(e) => handleChange('addressLine1', e.target.value)}
+              placeholder={t.account.addresses.form.addressLine1Placeholder}
+              className={`${styles.input} ${errors.addressLine1 ? styles.inputError : ''}`}
+              required
+            />
+            {errors.addressLine1 && (
+              <span className={styles.errorMessage}>{errors.addressLine1}</span>
+            )}
+          </div>
+
+          <div className={styles.formGroup}>
+            <label htmlFor="addressLine2" className={styles.label}>
+              {t.account.addresses.form.addressLine2}
+            </label>
+            <input
+              type="text"
+              id="addressLine2"
+              value={formData.addressLine2}
+              onChange={(e) => handleChange('addressLine2', e.target.value)}
+              placeholder={t.account.addresses.form.addressLine2Placeholder}
+              className={styles.input}
+            />
+          </div>
         </div>
 
-        <div className={styles.formGroup}>
-          <label htmlFor="addressLine2" className={styles.label}>
-            {t.account.addresses.form.addressLine2}
-          </label>
-          <input
-            type="text"
-            id="addressLine2"
-            value={formData.addressLine2}
-            onChange={(e) => handleChange('addressLine2', e.target.value)}
-            placeholder={t.account.addresses.form.addressLine2Placeholder}
-            className={styles.input}
-          />
-        </div>
-
+        {/* Row 3: City + State */}
         <div className={styles.formRow}>
           <div className={styles.formGroup}>
             <label htmlFor="city" className={styles.label}>
@@ -165,6 +193,7 @@ export default function AddressForm({ address, onSubmit, onCancel }: AddressForm
           </div>
         </div>
 
+        {/* Row 4: Postal Code + Country (disabled) */}
         <div className={styles.formRow}>
           <div className={styles.formGroup}>
             <label htmlFor="postalCode" className={styles.label}>
@@ -184,36 +213,18 @@ export default function AddressForm({ address, onSubmit, onCancel }: AddressForm
             <label htmlFor="country" className={styles.label}>
               {t.account.addresses.form.country}
             </label>
-            <select
+            <input
+              type="text"
               id="country"
-              value={formData.country}
-              onChange={(e) => handleChange('country', e.target.value)}
-              className={styles.input}
-            >
-              <option value="CO">Colombia</option>
-              <option value="US">United States</option>
-              <option value="MX">México</option>
-              <option value="AR">Argentina</option>
-              <option value="CL">Chile</option>
-            </select>
+              value="Colombia"
+              disabled
+              className={`${styles.input} ${styles.inputDisabled}`}
+            />
           </div>
         </div>
 
-        <div className={styles.formGroup}>
-          <label htmlFor="phone" className={styles.label}>
-            {t.account.addresses.form.phone}
-          </label>
-          <input
-            type="tel"
-            id="phone"
-            value={formData.phone}
-            onChange={(e) => handleChange('phone', e.target.value)}
-            placeholder={t.account.addresses.form.phonePlaceholder}
-            className={styles.input}
-          />
-        </div>
-
-        <div className={styles.formGroup}>
+        {/* Row 5: Default checkbox */}
+        <div className={styles.checkboxRow}>
           <label className={styles.checkboxLabel}>
             <input
               type="checkbox"

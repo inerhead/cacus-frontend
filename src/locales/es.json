@@ -93,6 +93,7 @@
     "viewAddresses": "ver direcciones ({count})",
     "noAddresses": "No tienes direcciones guardadas",
     "orderHistory": "Historial de pedidos",
+    "viewOrders": "ver pedidos ({count})",
     "noOrders": "No tiene pedidos",
     "addresses": {
       "title": "Mis direcciones",

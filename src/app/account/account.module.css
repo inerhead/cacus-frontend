@@ -6,8 +6,26 @@
 }
 
 .content {
-  max-width: 900px;
+  max-width: 1000px;
   margin: 0 auto;
+}
+
+/* Two Column Layout */
+.columnsContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.column .section {
+  margin-bottom: 0;
 }
 
 .loading {
@@ -196,15 +214,14 @@
   margin: 0.5rem 0 0 0;
 }
 
-/* Order History Section */
-.orderHistory {
-  min-height: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 /* Responsive Design */
+@media (max-width: 768px) {
+  .columnsContainer {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 640px) {
   .container {
     padding: 1rem 0.5rem;

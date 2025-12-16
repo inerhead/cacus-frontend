@@ -93,6 +93,7 @@
     "viewAddresses": "view addresses ({count})",
     "noAddresses": "You have no saved addresses",
     "orderHistory": "Order History",
+    "viewOrders": "view orders ({count})",
     "noOrders": "No orders yet",
     "addresses": {
       "title": "My Addresses",
