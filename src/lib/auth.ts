@@ -4,6 +4,26 @@ import FacebookProvider from 'next-auth/providers/facebook';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import type { NextAuthConfig } from 'next-auth';
 
+// Helper function to decode JWT and get expiration time
+function getTokenExpiration(token: string): number | null {
+  try {
+    const payload = token.split('.')[1];
+    const decoded = JSON.parse(Buffer.from(payload, 'base64').toString());
+    return decoded.exp || null;
+  } catch {
+    return null;
+  }
+}
+
+// Check if token is expired
+function isTokenExpired(accessToken: string | undefined): boolean {
+  if (!accessToken) return true;
+  const exp = getTokenExpiration(accessToken);
+  if (!exp) return true;
+  // Token is expired if current time is past expiration
+  return Date.now() >= exp * 1000;
+}
+
 const authConfig: NextAuthConfig = {
   providers: [
     GoogleProvider({
@@ -218,20 +238,27 @@ const authConfig: NextAuthConfig = {
         };
       }
 
-      // Subsequent requests
+      // Subsequent requests - check if token is expired
+      if (isTokenExpired(token.accessToken as string)) {
+        // Token expired, return empty token to force logout
+        return {};
+      }
       return token;
     },
     async session({ session, token }) {
-      if (token) {
-        session.user.id = token.userId as string;
-        session.accessToken = token.accessToken as string;
-        session.refreshToken = token.refreshToken as string;
-        session.user.firstName = token.firstName as string;
-        session.user.avatarUrl = token.avatarUrl as string;
-        // Also set image for compatibility
-        if (token.avatarUrl && !session.user.image) {
-          session.user.image = token.avatarUrl as string;
-        }
+      // If token is empty (expired), return null to invalidate session
+      if (!token.accessToken) {
+        return null as any;
+      }
+
+      session.user.id = token.userId as string;
+      session.accessToken = token.accessToken as string;
+      session.refreshToken = token.refreshToken as string;
+      session.user.firstName = token.firstName as string;
+      session.user.avatarUrl = token.avatarUrl as string;
+      // Also set image for compatibility
+      if (token.avatarUrl && !session.user.image) {
+        session.user.image = token.avatarUrl as string;
       }
 
       return session;
