@@ -21,20 +21,40 @@ const translations: Record<Language, Translations> = {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
+// Helper to set cookie
+const setCookie = (name: string, value: string, days: number = 365) => {
+  const expires = new Date(Date.now() + days * 864e5).toUTCString();
+  document.cookie = `${name}=${value}; expires=${expires}; path=/; SameSite=Lax`;
+};
+
+// Helper to get cookie
+const getCookie = (name: string): string | null => {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop()?.split(';').shift() || null;
+  return null;
+};
+
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguageState] = useState<Language>('es');
 
   useEffect(() => {
-    // Load language from localStorage on mount
-    const savedLanguage = localStorage.getItem('preferredLanguage') as Language;
+    // Load language from cookie or localStorage on mount
+    const cookieLang = getCookie('preferredLanguage') as Language;
+    const savedLanguage = cookieLang || localStorage.getItem('preferredLanguage') as Language;
     if (savedLanguage && (savedLanguage === 'es' || savedLanguage === 'en')) {
       setLanguageState(savedLanguage);
+      // Sync cookie if it was from localStorage
+      if (!cookieLang) {
+        setCookie('preferredLanguage', savedLanguage);
+      }
     }
   }, []);
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
     localStorage.setItem('preferredLanguage', lang);
+    setCookie('preferredLanguage', lang);
     // Update HTML lang attribute
     document.documentElement.lang = lang;
   };

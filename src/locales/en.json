@@ -1,4 +1,9 @@
 {
+  "metadata": {
+    "title": "CACUS Gift Store - Educational Toys for Kids",
+    "description": "Find the best educational and didactic toys for your children's development. Certified products with Montessori, Waldorf pedagogies and more.",
+    "keywords": "educational toys, didactic toys, Montessori, STEM, child development"
+  },
   "common": {
     "loading": "Loading...",
     "save": "Save",
