@@ -223,6 +223,8 @@ const authConfig: NextAuthConfig = {
                 firstName: data.user.firstName || firstName,
                 avatarUrl: avatarUrl || data.user.avatarUrl,
                 role: data.user.role || 'customer',
+                preferredLanguage: data.user.preferredLanguage || 'es',
+                preferredCurrency: data.user.preferredCurrency || 'COP',
               };
             } else {
               console.error('Failed to get tokens from backend:', await loginResponse.text());
@@ -241,6 +243,8 @@ const authConfig: NextAuthConfig = {
           firstName: firstName || user.firstName,
           avatarUrl: avatarUrl,
           role: user.role || 'customer',
+          preferredLanguage: user.preferredLanguage || 'es',
+          preferredCurrency: user.preferredCurrency || 'COP',
         };
       }
 
@@ -262,7 +266,9 @@ const authConfig: NextAuthConfig = {
       session.refreshToken = token.refreshToken as string;
       session.user.firstName = token.firstName as string;
       session.user.avatarUrl = token.avatarUrl as string;
-      session.user.role = token.role as string; // Add role to session
+      session.user.role = token.role as string;
+      session.user.preferredLanguage = token.preferredLanguage as string;
+      session.user.preferredCurrency = token.preferredCurrency as string;
       // Also set image for compatibility
       if (token.avatarUrl && !session.user.image) {
         session.user.image = token.avatarUrl as string;

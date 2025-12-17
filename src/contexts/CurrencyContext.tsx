@@ -1,7 +1,9 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { useSession } from 'next-auth/react';
 import { getExchangeRate as fetchExchangeRate } from '@/lib/api/settings';
+import { usersApiClient } from '@/lib/api/users';
 
 export type CurrencyCode = 'COP' | 'USD';
 
@@ -45,6 +47,7 @@ interface CurrencyContextType {
 const CurrencyContext = createContext<CurrencyContextType | undefined>(undefined);
 
 export function CurrencyProvider({ children }: { children: React.ReactNode }) {
+  const { data: session } = useSession();
   const [currencyCode, setCurrencyCode] = useState<CurrencyCode>('COP');
   const [exchangeRate, setExchangeRate] = useState<number>(4000);
   const [currencies, setCurrencies] = useState(getCurrencies(4000));
@@ -76,12 +79,35 @@ export function CurrencyProvider({ children }: { children: React.ReactNode }) {
       setCurrencyCode(saved);
     }
   }, []);
-
-  // Save to localStorage when currency changes
-  const handleSetCurrency = (code: CurrencyCode) => {
+  // Load user preferences from session when authenticated
+  useEffect(() => {
+    if (session?.user && (session.user as any)?.preferredCurrency) {
+      const userCurrency = (session.user as any).preferredCurrency as CurrencyCode;
+      if (userCurrency === 'COP' || userCurrency === 'USD') {
+        setCurrencyCode(userCurrency);
+        localStorage.setItem('currency', userCurrency);
+      }
+    }
+  }, [session]);
+  // Save to localStorage and sync with DB if authenticated
+  const handleSetCurrency = async (code: CurrencyCode) => {
     setCurrencyCode(code);
     if (mounted) {
       localStorage.setItem('currency', code);
+      
+      // Sync with backend if user is authenticated
+      if (session?.user?.id) {
+        try {
+          const token = (session as any)?.accessToken;
+          await usersApiClient.updatePreferences(
+            session.user.id,
+            { preferredCurrency: code },
+            token
+          );
+        } catch (error) {
+          console.error('Error syncing currency preference:', error);
+        }
+      }
     }
   };
 

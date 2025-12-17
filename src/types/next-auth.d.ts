@@ -13,6 +13,8 @@ declare module 'next-auth' {
       image?: string;
       avatarUrl?: string;
       role?: string;
+      preferredLanguage?: string;
+      preferredCurrency?: string;
     };
   }
 
@@ -26,6 +28,8 @@ declare module 'next-auth' {
     accessToken?: string;
     refreshToken?: string;
     role?: string;
+    preferredLanguage?: string;
+    preferredCurrency?: string;
   }
 }
 

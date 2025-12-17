@@ -1,8 +1,10 @@
 'use client';
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { useSession } from 'next-auth/react';
 import es from '@/locales/es.json';
 import en from '@/locales/en.json';
+import { usersApiClient } from '@/lib/api/users';
 
 type Language = 'es' | 'en';
 
@@ -36,6 +38,7 @@ const getCookie = (name: string): string | null => {
 };
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
+  const { data: session } = useSession();
   const [language, setLanguageState] = useState<Language>('es');
 
   useEffect(() => {
@@ -51,12 +54,39 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  const setLanguage = (lang: Language) => {
+  // Load user preferences from session when authenticated
+  useEffect(() => {
+    if (session?.user && (session.user as any)?.preferredLanguage) {
+      const userLang = (session.user as any).preferredLanguage as Language;
+      if (userLang === 'es' || userLang === 'en') {
+        setLanguageState(userLang);
+        localStorage.setItem('preferredLanguage', userLang);
+        setCookie('preferredLanguage', userLang);
+        document.documentElement.lang = userLang;
+      }
+    }
+  }, [session]);
+
+  const setLanguage = async (lang: Language) => {
     setLanguageState(lang);
     localStorage.setItem('preferredLanguage', lang);
     setCookie('preferredLanguage', lang);
     // Update HTML lang attribute
     document.documentElement.lang = lang;
+
+    // Sync with backend if user is authenticated
+    if (session?.user?.id) {
+      try {
+        const token = (session as any)?.accessToken;
+        await usersApiClient.updatePreferences(
+          session.user.id,
+          { preferredLanguage: lang },
+          token
+        );
+      } catch (error) {
+        console.error('Error syncing language preference:', error);
+      }
+    }
   };
 
   const value: LanguageContextType = {

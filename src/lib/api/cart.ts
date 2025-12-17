@@ -87,9 +87,4 @@ export const cartApiClient = {
     const { data } = await cartApi.post('/merge');
     return data;
   },
-
-  // Sync to database (for authenticated users)
-  syncToDatabase: async (): Promise<void> => {
-    await cartApi.post('/sync');
-  },
 };
