@@ -19,6 +19,15 @@ export const appSettings = {
     showBanner: false, // Cambiar a true para mostrar banner de envío
   },
 
+  // Configuración de monedas y tasas de cambio
+  currencies: {
+    default: 'COP' as const,
+    exchangeRates: {
+      // Tasa base: 1 USD = X COP
+      USD_TO_COP: 4000, // Actualizar según tasa del día
+    },
+  },
+
   // Configuración de estilos de botones
   buttons: {
     primary: {
@@ -151,7 +160,7 @@ export const appSettings = {
   // Configuración de footer
   footer: {
     showSocialLinks: true,
-    showNewsletter: true,
+    showNewsletter: false,
     year: new Date().getFullYear(),
     companyName: 'CACUS GIFT COLOMBIA',
     location: 'Barranquilla, Colombia',

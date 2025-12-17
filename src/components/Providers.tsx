@@ -3,6 +3,7 @@
 import { SessionProvider } from 'next-auth/react';
 import { ReactNode } from 'react';
 import { LanguageProvider } from '@/contexts/LanguageContext';
+import { CurrencyProvider } from '@/contexts/CurrencyContext';
 import ToastProvider from '@/contexts/ToastContext';
 
 interface ProvidersProps {
@@ -13,9 +14,11 @@ export default function Providers({ children }: ProvidersProps) {
   return (
     <SessionProvider>
       <LanguageProvider>
-        <ToastProvider>
-          {children}
-        </ToastProvider>
+        <CurrencyProvider>
+          <ToastProvider>
+            {children}
+          </ToastProvider>
+        </CurrencyProvider>
       </LanguageProvider>
     </SessionProvider>
   );

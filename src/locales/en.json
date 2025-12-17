@@ -26,7 +26,8 @@
     "user": "User",
     "login": "Sign in",
     "myAccount": "My account",
-    "shippingBanner": "SECURE AND FREE SHIPPING ON PURCHASES OVER $299,900"
+    "shippingBanner": "SECURE AND FREE SHIPPING ON PURCHASES OVER $299,900",
+    "currency": "Currency"
   },
   "navigation": {
     "themes": "THEMES",
@@ -103,6 +104,40 @@
       "title": "Administration",
       "inventory": "Product Inventory",
       "inventoryDescription": "Manage stock, prices and products"
+    },
+    "currency": {
+      "title": "Currency Settings",
+      "exchangeRate": "USD/COP Exchange Rate",
+      "exchangeRateDescription": "Update the dollar value in Colombian pesos",
+      "configure": "configure exchange rate"
+    },
+    "settings": {
+      "title": "Store Settings",
+      "subtitle": "Administration panel to configure global options",
+      "exchangeRateTitle": "USD/COP Exchange Rate",
+      "rateLabel": "1 USD = ? COP",
+      "ratePlaceholder": "4000",
+      "rateHelp": "Update this rate according to the dollar value in Colombian pesos.",
+      "preview": "Preview:",
+      "example": "Product example:",
+      "saving": "Saving...",
+      "saveChanges": "Save Changes",
+      "reset": "Reset",
+      "tip": "Tip:",
+      "tipText": "Update this rate regularly to maintain accurate USD prices. You can check the current rate at",
+      "tipOr": "or at your preferred bank.",
+      "systemInfo": "System Information",
+      "baseCurrency": "Base Currency:",
+      "baseCurrencyValue": "COP (Colombian Peso)",
+      "availableCurrencies": "Available Currencies:",
+      "availableCurrenciesValue": "COP, USD",
+      "lastUpdate": "Last Updated:",
+      "storage": "Storage:",
+      "storageValue": "Database (PostgreSQL)",
+      "rateError": "The rate must be a positive number",
+      "authError": "Authentication token not found",
+      "saveError": "Error saving exchange rate",
+      "saveSuccess": "Exchange rate updated successfully"
     },
     "addresses": {
       "title": "My Addresses",

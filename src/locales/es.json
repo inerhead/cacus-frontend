@@ -26,7 +26,8 @@
     "user": "Usuario",
     "login": "Iniciar sesión",
     "myAccount": "Mi cuenta",
-    "shippingBanner": "ENVÍOS SEGUROS Y GRATIS EN COMPRAS A PARTIR DE $299.900"
+    "shippingBanner": "ENVÍOS SEGUROS Y GRATIS EN COMPRAS A PARTIR DE $299.900",
+    "currency": "Moneda"
   },
   "navigation": {
     "themes": "TEMAS",
@@ -105,6 +106,40 @@
       "title": "Administración",
       "inventory": "Inventario de Productos",
       "inventoryDescription": "Gestionar stock, precios y productos"
+    },
+    "currency": {
+      "title": "Configuración de Monedas",
+      "exchangeRate": "Tasa de Cambio USD/COP",
+      "exchangeRateDescription": "Actualizar el valor del dólar en pesos colombianos",
+      "configure": "configurar tasa de cambio"
+    },
+    "settings": {
+      "title": "Configuración de la Tienda",
+      "subtitle": "Panel de administración para configurar opciones globales",
+      "exchangeRateTitle": "Tasa de Cambio USD/COP",
+      "rateLabel": "1 USD = ? COP",
+      "ratePlaceholder": "4000",
+      "rateHelp": "Actualiza esta tasa según el valor del dólar en pesos colombianos.",
+      "preview": "Vista Previa:",
+      "example": "Ejemplo de producto:",
+      "saving": "Guardando...",
+      "saveChanges": "Guardar Cambios",
+      "reset": "Restablecer",
+      "tip": "Consejo:",
+      "tipText": "Actualiza esta tasa regularmente para mantener precios precisos en USD. Puedes consultar la tasa actual en",
+      "tipOr": "o en el banco de tu preferencia.",
+      "systemInfo": "Información del Sistema",
+      "baseCurrency": "Moneda Base:",
+      "baseCurrencyValue": "COP (Peso Colombiano)",
+      "availableCurrencies": "Monedas Disponibles:",
+      "availableCurrenciesValue": "COP, USD",
+      "lastUpdate": "Última Actualización:",
+      "storage": "Almacenamiento:",
+      "storageValue": "Base de Datos (PostgreSQL)",
+      "rateError": "La tasa debe ser un número positivo",
+      "authError": "No se encontró el token de autenticación",
+      "saveError": "Error al guardar la tasa de cambio",
+      "saveSuccess": "Tasa de cambio actualizada exitosamente"
     },
     "addresses": {
       "title": "Mis direcciones",

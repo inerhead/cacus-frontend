@@ -114,26 +114,28 @@ export default function HomeContent({ displayProducts }: HomeContentProps) {
       </section>
 
       {/* Newsletter Section */}
-      <section className="bg-lego-blue text-white py-12">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-4">
-            {t.home.newsletterTitle}
-          </h2>
-          <p className="text-lg mb-6">
-            {t.home.newsletterText}
-          </p>
-          <form className="max-w-md mx-auto flex gap-2">
-            <input
-              type="email"
-              placeholder={t.home.newsletterPlaceholder}
-              className="flex-1 px-4 py-3 text-black rounded-none focus:outline-none focus:ring-2 focus:ring-lego-yellow"
-            />
-            <button type="submit" className="btn-lego">
-              {t.home.register}
-            </button>
-          </form>
-        </div>
-      </section>
+      {appSettings.footer.showNewsletter && (
+        <section className="bg-lego-blue text-white py-12">
+          <div className="container mx-auto px-4 text-center">
+            <h2 className="text-3xl font-bold mb-4">
+              {t.home.newsletterTitle}
+            </h2>
+            <p className="text-lg mb-6">
+              {t.home.newsletterText}
+            </p>
+            <form className="max-w-md mx-auto flex gap-2">
+              <input
+                type="email"
+                placeholder={t.home.newsletterPlaceholder}
+                className="flex-1 px-4 py-3 text-black rounded-none focus:outline-none focus:ring-2 focus:ring-lego-yellow"
+              />
+              <button type="submit" className="btn-lego">
+                {t.home.register}
+              </button>
+            </form>
+          </div>
+        </section>
+      )}
     </div>
   );
 }

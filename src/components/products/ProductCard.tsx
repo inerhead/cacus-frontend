@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { ShoppingCart } from 'lucide-react';
 import appSettings from '@/config/settings';
 import { useTranslation } from '@/contexts/LanguageContext';
+import { useCurrency } from '@/contexts/CurrencyContext';
 
 interface ProductCardProps {
   id: string;
@@ -34,19 +35,12 @@ export default function ProductCard({
 }: ProductCardProps) {
   const [isHovered, setIsHovered] = React.useState(false);
   const t = useTranslation();
+  const { formatPrice } = useCurrency();
   // Use settings for defaults
   const settings = appSettings;
   const defaultImage = imageUrl || settings.images.productPlaceholder;
   const shouldShowDelivery = showDeliveryOptions ?? settings.products.showDeliveryOptions;
   const qualifiesForFreeShipping = hasFreeShipping ?? (price >= settings.shipping.freeShippingThreshold);
-
-  const formatPrice = (amount: number) => {
-    return new Intl.NumberFormat('es-CO', {
-      style: 'currency',
-      currency: settings.shipping.currency,
-      minimumFractionDigits: 0,
-    }).format(amount);
-  };
 
   const discountPercentage = compareAtPrice
     ? Math.round(((compareAtPrice - price) / compareAtPrice) * 100)
@@ -108,9 +102,9 @@ export default function ProductCard({
             )}
           </div>
 
-          {/* Add to Cart Button - Shows on hover */}
+          {/* Add to Cart Button - Shows on hover in top right corner */}
           {isHovered && (
-            <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 transition-opacity duration-300">
+            <div className="absolute top-2 right-2 z-20">
               <button
                 onClick={(e) => {
                   e.preventDefault();
@@ -118,10 +112,10 @@ export default function ProductCard({
                   // TODO: Add to cart logic
                   console.log('Add to cart:', id);
                 }}
-                className="btn-lego flex items-center justify-center gap-2 text-sm px-6 py-3 shadow-lg hover:scale-105 transition-transform"
+                className="btn-lego flex items-center justify-center gap-2 text-sm px-4 py-2 shadow-lg hover:scale-105 transition-transform"
                 aria-label={t.product.addToCart}
               >
-                <ShoppingCart className="w-5 h-5" />
+                <ShoppingCart className="w-4 h-4" />
                 {t.product.addToCart}
               </button>
             </div>

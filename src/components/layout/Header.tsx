@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { useTranslation } from '@/contexts/LanguageContext';
 import { AdminBadge } from '@/components/ui/AdminBadge';
+import CurrencySelector from './CurrencySelector';
 import styles from './Header.module.css';
 
 export default function Header() {
@@ -55,6 +56,7 @@ export default function Header() {
 
             <div className={styles.userIconsArea}>
               <div className={styles.userIcons}>
+                <CurrencySelector />
                 <div className={styles.userSection}>
                   <Link
                     href={session ? "/account" : "/login"}

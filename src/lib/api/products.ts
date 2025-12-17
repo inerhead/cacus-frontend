@@ -115,12 +115,12 @@ class ProductsAPI {
   }
 
   async getFeatured(params?: Omit<ProductQueryParams, 'featured'>): Promise<ProductsResponse> {
-    const queryString = this.buildQueryString(params);
+    const queryString = this.buildQueryString({ ...params, status: 'active' });
     return this.request<ProductsResponse>(`${this.baseURL}/featured${queryString}`);
   }
 
   async getNew(params?: Omit<ProductQueryParams, 'isNew'>): Promise<ProductsResponse> {
-    const queryString = this.buildQueryString(params);
+    const queryString = this.buildQueryString({ ...params, status: 'active' });
     return this.request<ProductsResponse>(`${this.baseURL}/new${queryString}`);
   }
 

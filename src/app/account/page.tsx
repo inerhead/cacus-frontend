@@ -144,18 +144,32 @@ export default function AccountPage() {
           <div className={styles.column}>
             {/* Admin Inventory Section - Only visible for admin role */}
             {(session.user as any)?.role === 'admin' && (
-              <div className={styles.section}>
-                <h3 className={styles.sectionTitle}>🛠️ {t.account.admin.title}</h3>
-                <div className={styles.addressInfo}>
-                  <div className={styles.addressDetails}>
-                    <p className={styles.addressName}>{t.account.admin.inventory}</p>
-                    <p className={styles.addressText}>{t.account.admin.inventoryDescription}</p>
+              <>
+                <div className={styles.section}>
+                  <h3 className={styles.sectionTitle}>⚙️ {t.account.admin.title}</h3>
+                  <div className={styles.addressInfo}>
+                    <div className={styles.addressDetails}>
+                      <p className={styles.addressName}>{t.account.admin.inventory}</p>
+                      <p className={styles.addressText}>{t.account.admin.inventoryDescription}</p>
+                    </div>
+                    <Link href="/account/inventory" className={styles.link}>
+                      gestionar inventario ({productCount})
+                    </Link>
                   </div>
-                  <Link href="/account/inventory" className={styles.link}>
-                    gestionar inventario ({productCount})
-                  </Link>
                 </div>
-              </div>
+                <div className={styles.section}>
+                  <h3 className={styles.sectionTitle}>💱 {t.account.currency.title}</h3>
+                  <div className={styles.addressInfo}>
+                    <div className={styles.addressDetails}>
+                      <p className={styles.addressName}>{t.account.currency.exchangeRate}</p>
+                      <p className={styles.addressText}>{t.account.currency.exchangeRateDescription}</p>
+                    </div>
+                    <Link href="/account/settings" className={styles.link}>
+                      {t.account.currency.configure}
+                    </Link>
+                  </div>
+                </div>
+              </>
             )}
 
             {/* Default Address Section */}
