@@ -1,7 +1,7 @@
 'use client';
 
 import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useTranslation } from '@/contexts/LanguageContext';
@@ -16,6 +16,7 @@ import styles from './addresses.module.css';
 export default function AddressesPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const t = useTranslation();
   const [addresses, setAddresses] = useState<Address[]>([]);
   const [loading, setLoading] = useState(true);
@@ -27,6 +28,10 @@ export default function AddressesPage() {
     addressId: null,
   });
   const { toasts, showToast, removeToast } = useToast();
+
+  // Get return URL from query params (e.g., /checkout)
+  const returnUrl = searchParams.get('returnUrl') || '/account';
+  const isFromCheckout = returnUrl === '/checkout';
 
   useEffect(() => {
     if (status === 'unauthenticated') {
@@ -165,9 +170,12 @@ export default function AddressesPage() {
           <Button 
             variant="ghost"
             size="small"
-            onClick={() => router.push('/account')}
+            onClick={() => router.push(returnUrl)}
           >
-            {t.account.addresses.backToAccount}
+            {isFromCheckout 
+              ? (t.account.addresses.backToCheckout || '← Volver al checkout')
+              : t.account.addresses.backToAccount
+            }
           </Button>
           <h1 className={styles.title}>{t.account.addresses.title}</h1>
         </div>

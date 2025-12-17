@@ -117,6 +117,12 @@
       "inventoryDescription": "Manage stock, prices and products",
       "manageInventory": "manage inventory",
       "editContent": "edit content",
+      "providers": "Payment Providers",
+      "providersDescription": "Configure PSE, ePayco, PayU and other payment methods",
+      "manageProviders": "configure providers",
+      "banks": "Banks for PSE",
+      "banksDescription": "Manage available banks in PSE selector",
+      "manageBanks": "manage banks",
       "content": {
         "title": "Dynamic Home Content",
         "description": "Edit main hero titles and texts",
@@ -168,6 +174,7 @@
     "addresses": {
       "title": "My Addresses",
       "backToAccount": "Back to Profile",
+      "backToCheckout": "← Back to Checkout",
       "noAddresses": "You have no saved addresses",
       "addNew": "Add new address",
       "edit": "Edit",
@@ -342,5 +349,50 @@
     "reviews": "Reviews",
     "sameDayShipping": "SAME DAY SHIPPING",
     "pickupInStore": "PICKUP IN STORE"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "shippingAddress": "Shipping Address",
+    "orderSummary": "Order Summary",
+    "paymentMethod": "Payment Method",
+    "pse": "PSE - Secure Online Payment",
+    "creditCard": "Credit Card",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "tax": "Tax (19%)",
+    "total": "Total",
+    "placeOrder": "Confirm and Pay",
+    "processing": "Processing...",
+    "noAddress": "You don't have any saved addresses",
+    "addAddress": "Add address",
+    "changeAddress": "Change address",
+    "selectAddress": "Select a shipping address",
+    "notes": "Notes (optional)",
+    "notesPlaceholder": "Special delivery instructions..."
+  },
+  "payment": {
+    "pse": {
+      "legalEntity": "Legal Entity",
+      "naturalPerson": "Natural Person",
+      "selectBank": "Select the bank",
+      "selectBankPlaceholder": "Please select your bank"
+    }
+  },
+  "orders": {
+    "title": "My Orders",
+    "noOrders": "You don't have any orders yet",
+    "orderNumber": "Order #",
+    "date": "Date",
+    "status": "Status",
+    "total": "Total",
+    "viewDetails": "View details",
+    "items": "items",
+    "shippingTo": "Shipping to",
+    "paymentMethod": "Payment method",
+    "statusPending": "Pending payment",
+    "statusProcessing": "Processing",
+    "statusShipped": "Shipped",
+    "statusDelivered": "Delivered",
+    "statusCancelled": "Cancelled"
   }
 }

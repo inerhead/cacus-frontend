@@ -1,0 +1,114 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.header {
+  border-bottom: 2px solid #FFEB3B;
+  padding-bottom: 1rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #000;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.errorBanner {
+  padding: 1rem;
+  background: #ffe6e6;
+  border: 3px solid #E60012;
+  color: #E60012;
+  font-weight: 700;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.formContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.label {
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  color: #000;
+}
+
+.input {
+  padding: 0.75rem;
+  border: 2px solid #e0e0e0;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.2s;
+  background: #fff;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #FFEB3B;
+}
+
+.inputError {
+  border-color: #E60012;
+}
+
+.error {
+  color: #E60012;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.hint {
+  color: #999;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.checkbox {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: #FFEB3B;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 2px solid #e0e0e0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .actions {
+    flex-direction: column-reverse;
+  }
+}

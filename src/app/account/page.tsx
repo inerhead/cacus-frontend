@@ -20,6 +20,8 @@ export default function AccountPage() {
   const [addresses, setAddresses] = useState<Address[]>([]);
   const [loadingAddresses, setLoadingAddresses] = useState(true);
   const [productCount, setProductCount] = useState(0);
+  const [orderCount, setOrderCount] = useState(0);
+  const [hasLoaded, setHasLoaded] = useState(false);
 
   useEffect(() => {
     if (status === 'unauthenticated') {
@@ -28,16 +30,18 @@ export default function AccountPage() {
   }, [status, router]);
 
   useEffect(() => {
-    if (session) {
+    if (session && !hasLoaded) {
       console.log('[Account Page] Session user role:', (session.user as any)?.role);
       console.log('[Account Page] Full session:', session);
+      setHasLoaded(true);
       loadAddresses();
+      loadOrderCount();
       // Load product count if user is admin
       if ((session.user as any)?.role === 'ADMIN') {
         loadProductCount();
       }
     }
-  }, [session]);
+  }, [session?.user?.email, hasLoaded]);
 
   const loadAddresses = async () => {
     try {
@@ -60,6 +64,17 @@ export default function AccountPage() {
     } catch (err: any) {
       console.error('Error loading product count:', err);
       setProductCount(0);
+    }
+  };
+
+  const loadOrderCount = async () => {
+    try {
+      const { ordersApiClient } = await import('@/lib/api/orders');
+      const data = await ordersApiClient.getUserOrders(1, 1);
+      setOrderCount(data.meta?.total || 0);
+    } catch (err: any) {
+      console.error('Error loading order count:', err);
+      setOrderCount(0);
     }
   };
 
@@ -179,6 +194,24 @@ export default function AccountPage() {
                       {t.account.admin.editContent || 'editar contenido'} →
                     </Link>
                   </div>
+                  <div className={styles.addressInfo} style={{ marginTop: '1rem' }}>
+                    <div className={styles.addressDetails}>
+                      <p className={styles.addressName}>💳 {t.account.admin.providers}</p>
+                      <p className={styles.addressText}>{t.account.admin.providersDescription}</p>
+                    </div>
+                    <Link href="/account/providers" className={styles.link}>
+                      {t.account.admin.manageProviders} →
+                    </Link>
+                  </div>
+                  <div className={styles.addressInfo} style={{ marginTop: '1rem' }}>
+                    <div className={styles.addressDetails}>
+                      <p className={styles.addressName}>🏦 {t.account.admin.banks}</p>
+                      <p className={styles.addressText}>{t.account.admin.banksDescription}</p>
+                    </div>
+                    <Link href="/account/banks" className={styles.link}>
+                      {t.account.admin.manageBanks} →
+                    </Link>
+                  </div>
                 </div>
                 <div className={styles.section}>
                   <h3 className={styles.sectionTitle}>💱 {t.account.currency.title}</h3>
@@ -248,10 +281,12 @@ export default function AccountPage() {
               <div className={styles.addressInfo}>
                 <p className={styles.addressName}>{session.user?.name || t.account.defaultUser}</p>
                 <Link href="/account/orders" className={styles.link}>
-                  {t.account.viewOrders.replace('{count}', '0')}
+                  {t.account.viewOrders.replace('{count}', orderCount.toString())}
                 </Link>
               </div>
-              <p className={styles.noData}>{t.account.noOrders}</p>
+              {orderCount === 0 && (
+                <p className={styles.noData}>{t.account.noOrders}</p>
+              )}
             </div>
           </div>
         </div>

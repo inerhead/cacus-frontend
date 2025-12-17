@@ -1,0 +1,266 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #000;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: #666;
+  font-size: 1rem;
+}
+
+.loading {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.empty {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: #f5f5f5;
+  border: 2px dashed #ddd;
+}
+
+.empty p {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.emptyHint {
+  font-size: 0.9rem;
+  color: #999;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background: #fff;
+  border: 2px solid #e0e0e0;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.providerName {
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #000;
+  margin-bottom: 0.25rem;
+}
+
+.providerType {
+  font-size: 0.85rem;
+  color: #666;
+  font-weight: 600;
+}
+
+.badges {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.testBadge {
+  background: #FF6B35;
+  color: #fff;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.enabledBadge {
+  background: #4CAF50;
+  color: #fff;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.disabledBadge {
+  background: #999;
+  color: #fff;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.cardContent {
+  flex: 1;
+}
+
+.configInfo strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+.configList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.configList li {
+  padding: 0.5rem;
+  background: #f9f9f9;
+  margin-bottom: 0.25rem;
+  font-size: 0.875rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.configKey {
+  font-weight: 600;
+  color: #666;
+}
+
+.configValue {
+  color: #333;
+  font-family: monospace;
+}
+
+.cardActions {
+  display: flex;
+  gap: 0.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.deleteButton {
+  color: #E60012 !important;
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.modalContent {
+  background: #fff;
+  padding: 2rem;
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modalContent h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.modalHint {
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.providerOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.providerOption {
+  padding: 1rem;
+  border: 2px solid #e0e0e0;
+  background: #f9f9f9;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.providerOption:hover:not(:disabled) {
+  border-color: #FFEB3B;
+  background: #fffef0;
+  transform: translateY(-2px);
+}
+
+.providerOption:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.providerOption strong {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+  color: #000;
+}
+
+.providerOption p {
+  color: #666;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cardActions {
+    flex-wrap: wrap;
+  }
+}

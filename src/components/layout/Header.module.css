@@ -140,9 +140,9 @@
 
 .userSection {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  gap: 0.25rem;
+  gap: 0.5rem;
   position: relative;
 }
 
@@ -185,7 +185,7 @@
 }
 
 .userFirstName {
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: 600;
   color: #111111;
   max-width: 140px;
@@ -193,10 +193,9 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   line-height: 1;
-  position: absolute;
-  top: 100%;
-  margin-top: 0.25rem;
   text-transform: capitalize;
+  display: inline-flex;
+  align-items: center;
 }
 
 .iconLink {

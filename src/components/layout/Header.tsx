@@ -60,6 +60,14 @@ export default function Header() {
             <div className={styles.userIconsArea}>
               <div className={styles.userIcons}>
                 <div className={styles.userSection}>
+                  {session?.user?.firstName && (
+                    <span className={styles.userFirstName} title={session.user.email}>
+                      {session.user.firstName}
+                      {(session.user as any)?.role === 'admin' && (
+                        <AdminBadge size={14} className={styles.adminBadgeInline} />
+                      )}
+                    </span>
+                  )}
                   <Link
                     href={session ? "/account" : "/login"}
                     className={`${styles.iconLink} ${session ? styles.iconLinkLoggedIn : ''}`}
@@ -84,14 +92,6 @@ export default function Header() {
                       <User size={22} />
                     )}
                   </Link>
-                  {session?.user?.firstName && (
-                    <span className={styles.userFirstName} title={session.user.email}>
-                      {session.user.firstName}
-                      {(session.user as any)?.role === 'admin' && (
-                        <AdminBadge size={14} className={styles.adminBadgeInline} />
-                      )}
-                    </span>
-                  )}
                 </div>
                 <button 
                   onClick={() => setIsCartOpen(true)}

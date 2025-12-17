@@ -117,6 +117,12 @@
       "inventoryDescription": "Gestionar stock, precios y productos",
       "manageInventory": "gestionar inventario",
       "editContent": "editar contenido",
+      "providers": "Proveedores de Pago",
+      "providersDescription": "Configura PSE, ePayco, PayU y otros métodos de pago",
+      "manageProviders": "configurar proveedores",
+      "banks": "Bancos para PSE",
+      "banksDescription": "Administra los bancos disponibles en el selector de PSE",
+      "manageBanks": "gestionar bancos",
       "content": {
         "title": "Contenido Dinámico del Home",
         "description": "Editar títulos y textos del hero principal",
@@ -168,6 +174,7 @@
     "addresses": {
       "title": "Mis direcciones",
       "backToAccount": "Volver al Perfil",
+      "backToCheckout": "← Volver al Checkout",
       "noAddresses": "No tienes direcciones guardadas",
       "addNew": "Agregar nueva dirección",
       "edit": "Editar",
@@ -342,5 +349,50 @@
     "reviews": "Reseñas",
     "sameDayShipping": "ENVÍO MISMO DÍA",
     "pickupInStore": "RECOGE EN TIENDA"
+  },
+  "checkout": {
+    "title": "Finalizar Compra",
+    "shippingAddress": "Dirección de Envío",
+    "orderSummary": "Resumen de Pedido",
+    "paymentMethod": "Método de Pago",
+    "pse": "PSE - Pago Seguro en Línea",
+    "creditCard": "Tarjeta de Crédito",
+    "subtotal": "Subtotal",
+    "shipping": "Envío",
+    "tax": "IVA (19%)",
+    "total": "Total",
+    "placeOrder": "Confirmar y Pagar",
+    "processing": "Procesando...",
+    "noAddress": "No tienes direcciones guardadas",
+    "addAddress": "Agregar dirección",
+    "changeAddress": "Cambiar dirección",
+    "selectAddress": "Selecciona una dirección de envío",
+    "notes": "Notas (opcional)",
+    "notesPlaceholder": "Instrucciones especiales de entrega..."
+  },
+  "payment": {
+    "pse": {
+      "legalEntity": "Persona Jurídica",
+      "naturalPerson": "Persona Natural",
+      "selectBank": "Seleccione el banco",
+      "selectBankPlaceholder": "A continuación seleccione su banco"
+    }
+  },
+  "orders": {
+    "title": "Mis Pedidos",
+    "noOrders": "No tienes pedidos aún",
+    "orderNumber": "Pedido #",
+    "date": "Fecha",
+    "status": "Estado",
+    "total": "Total",
+    "viewDetails": "Ver detalles",
+    "items": "artículos",
+    "shippingTo": "Envío a",
+    "paymentMethod": "Método de pago",
+    "statusPending": "Pendiente de pago",
+    "statusProcessing": "En proceso",
+    "statusShipped": "Enviado",
+    "statusDelivered": "Entregado",
+    "statusCancelled": "Cancelado"
   }
 }

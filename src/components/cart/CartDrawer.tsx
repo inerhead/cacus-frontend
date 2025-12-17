@@ -2,6 +2,7 @@
 
 import { Fragment } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { X, Minus, Plus, Trash2 } from 'lucide-react';
 import { useTranslation } from '@/contexts/LanguageContext';
 import { useCurrency } from '@/contexts/CurrencyContext';
@@ -14,9 +15,15 @@ interface CartDrawerProps {
 }
 
 export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
+  const router = useRouter();
   const t = useTranslation();
   const { formatPrice } = useCurrency();
   const { items: cartItems, totalItems, totalPrice, updateQuantity, removeItem } = useCart();
+
+  const handleCheckout = () => {
+    onClose();
+    router.push('/checkout');
+  };
 
   if (!isOpen) return null;
 
@@ -114,6 +121,7 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
           <button
             className={styles.checkoutButton}
             disabled={cartItems.length === 0}
+            onClick={handleCheckout}
           >
             {t.cart.checkout}
           </button>
