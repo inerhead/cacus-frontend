@@ -1,9 +1,11 @@
 'use client';
 
+import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ShoppingCart, Eye } from 'lucide-react';
+import { ShoppingCart } from 'lucide-react';
 import appSettings from '@/config/settings';
+import { useTranslation } from '@/contexts/LanguageContext';
 
 interface ProductCardProps {
   id: string;
@@ -11,6 +13,7 @@ interface ProductCardProps {
   slug: string;
   price: number;
   imageUrl?: string;
+  hoverImageUrl?: string;
   isNew?: boolean;
   hasFreeShipping?: boolean;
   compareAtPrice?: number;
@@ -23,11 +26,14 @@ export default function ProductCard({
   slug,
   price,
   imageUrl,
+  hoverImageUrl,
   isNew = false,
   hasFreeShipping,
   compareAtPrice,
   showDeliveryOptions,
 }: ProductCardProps) {
+  const [isHovered, setIsHovered] = React.useState(false);
+  const t = useTranslation();
   // Use settings for defaults
   const settings = appSettings;
   const defaultImage = imageUrl || settings.images.productPlaceholder;
@@ -50,14 +56,19 @@ export default function ProductCard({
     <div className="product-card group">
       {/* Image Container */}
       <Link href={`/productos/${slug}`} className="block">
-        <div className="relative aspect-square bg-gray-100 overflow-hidden">
+        <div 
+          className="relative aspect-square bg-gray-100 overflow-hidden"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
           <Image
-            src={defaultImage}
+            src={isHovered && hoverImageUrl ? hoverImageUrl : defaultImage}
             alt={name}
             fill
-            className="object-cover group-hover:scale-105 transition-transform duration-300"
+            className="object-cover transition-all duration-500 ease-in-out"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             quality={settings.images.quality}
+            unoptimized
           />
           
           {/* Badges */}
@@ -70,7 +81,7 @@ export default function ProductCard({
                   color: settings.badges.new.textColor,
                 }}
               >
-                {settings.badges.new.text}
+                {t.product.new.toUpperCase()}
               </span>
             )}
             {qualifiesForFreeShipping && (
@@ -81,7 +92,7 @@ export default function ProductCard({
                   color: settings.badges.freeShipping.textColor,
                 }}
               >
-                {settings.badges.freeShipping.text} *
+                {t.product.freeShipping.toUpperCase()} *
               </span>
             )}
             {discountPercentage > 0 && (
@@ -96,6 +107,25 @@ export default function ProductCard({
               </span>
             )}
           </div>
+
+          {/* Add to Cart Button - Shows on hover */}
+          {isHovered && (
+            <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 transition-opacity duration-300">
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  // TODO: Add to cart logic
+                  console.log('Add to cart:', id);
+                }}
+                className="btn-lego flex items-center justify-center gap-2 text-sm px-6 py-3 shadow-lg hover:scale-105 transition-transform"
+                aria-label={t.product.addToCart}
+              >
+                <ShoppingCart className="w-5 h-5" />
+                {t.product.addToCart}
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Product Info */}
@@ -121,40 +151,16 @@ export default function ProductCard({
             <div className="flex gap-2 mb-3 text-xs">
               <span className="flex items-center gap-1 text-lego-red">
                 <span>🚚</span>
-                ENVÍO MISMO DÍA
+                {t.product.sameDayShipping}
               </span>
               <span className="flex items-center gap-1 text-lego-red">
                 <span>🏪</span>
-                RECOGE EN TIENDA
+                {t.product.pickupInStore}
               </span>
             </div>
           )}
         </div>
       </Link>
-
-      {/* Action Buttons - Outside Link to avoid nesting issues */}
-      <div className="px-4 pb-4 flex gap-2">
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            // TODO: Add to cart logic
-            console.log('Add to cart:', id);
-          }}
-          className="btn-lego flex-1 flex items-center justify-center gap-2 text-sm"
-          aria-label="Agregar al carrito"
-        >
-          <ShoppingCart className="w-4 h-4" />
-          Agregar al carrito
-        </button>
-        <Link
-          href={`/productos/${slug}`}
-          className="btn-lego-secondary flex items-center justify-center gap-2 text-sm px-4"
-          aria-label="Ver más detalles"
-        >
-          <Eye className="w-4 h-4" />
-          Ver más
-        </Link>
-      </div>
     </div>
   );
 }

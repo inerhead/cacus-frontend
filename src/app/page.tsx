@@ -2,6 +2,9 @@ import { productsAPI } from '@/lib/api/products';
 import appSettings from '@/config/settings';
 import HomeContent from '@/components/home/HomeContent';
 
+// Revalidate every 60 seconds
+export const revalidate = 60;
+
 async function getFeaturedProducts() {
   try {
     const response = await productsAPI.getFeatured({

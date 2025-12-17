@@ -1,0 +1,98 @@
+/* Image Preview Modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  cursor: pointer;
+  animation: fadeIn 0.2s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modalContent {
+  max-width: 90vw;
+  max-height: 90vh;
+  position: relative;
+  cursor: default;
+  animation: scaleIn 0.2s ease-out;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.closeButton {
+  position: absolute;
+  top: -50px;
+  right: 0;
+  background: #FFEB3B;
+  border: 3px solid #000;
+  font-size: 28px;
+  font-weight: bold;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  color: #000;
+  line-height: 1;
+  padding: 0;
+}
+
+.closeButton:hover {
+  background: #FF6B35;
+  color: #fff;
+  transform: scale(1.1);
+}
+
+.previewImage {
+  max-width: 100%;
+  max-height: 90vh;
+  object-fit: contain;
+  border: 3px solid #000;
+  background: #fff;
+  display: block;
+}
+
+/* Mobile responsiveness for modal */
+@media (max-width: 768px) {
+  .modalContent {
+    max-width: 95vw;
+    max-height: 85vh;
+  }
+
+  .closeButton {
+    top: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+  }
+
+  .previewImage {
+    max-height: 85vh;
+  }
+}

@@ -200,6 +200,7 @@
       "basicInfo": "Basic Information",
       "pricesInventory": "Prices & Inventory",
       "productDetails": "Product Details",
+      "productImages": "Product Images",
       "options": "Options",
       "sku": "SKU",
       "skuPlaceholder": "BLOCK-001",
@@ -251,16 +252,33 @@
       "invalidFileType": "Please select an Excel file (.xlsx or .xls)",
       "fileTooLarge": "File is too large (maximum 5MB)",
       "importSuccess": "{count} products imported successfully",
-      "importError": "Error importing products"
+      "importError": "Error importing products",
+      "imageUploadSuccess": "Image uploaded successfully",
+      "imageUploadError": "Error uploading image",
+      "imageDeleteSuccess": "Image deleted successfully",
+      "imageDeleteError": "Error deleting image",
+      "imagePrimarySuccess": "Primary image updated",
+      "imagePrimaryError": "Error setting primary image",
+      "imageMaxLimit": "Maximum {max} images allowed",
+      "imageInvalidType": "{name} is not a valid image file",
+      "imageMaxSize": "{name} exceeds the maximum size of {max}MB",
+      "dragOrUpload": "or drag files here",
+      "uploading": "Uploading...",
+      "uploadButton": "Upload Image",
+      "imageTitle": "Product Images",
+      "imageHint": "Formats: JPEG, PNG, WebP. Maximum {max}MB per image. Drag to reorder.",
+      "imagePrimary": "Primary"
     }
   },
   "product": {
-    "freeShipping": "Free shipping",
+    "freeShipping": "Free Shipping",
     "new": "New",
     "addToCart": "Add to cart",
     "buyNow": "Buy now",
     "description": "Description",
     "specifications": "Specifications",
-    "reviews": "Reviews"
+    "reviews": "Reviews",
+    "sameDayShipping": "SAME DAY SHIPPING",
+    "pickupInStore": "PICKUP IN STORE"
   }
 }

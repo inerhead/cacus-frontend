@@ -70,19 +70,28 @@ export default function HomeContent({ displayProducts }: HomeContentProps) {
           {displayProducts.length > 0 ? (
             <>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {displayProducts.map((product: Product) => (
-                  <ProductCard
-                    key={product.id}
-                    id={product.id}
-                    name={product.name}
-                    slug={product.slug}
-                    price={product.price}
-                    compareAtPrice={product.compareAtPrice}
-                    imageUrl={product.imageUrl}
-                    isNew={product.isNew}
-                    hasFreeShipping={product.price >= appSettings.shipping.freeShippingThreshold}
-                  />
-                ))}
+                {displayProducts.map((product: Product) => {
+                  // Get primary image or first image
+                  const primaryImage = product.images?.find(img => img.isPrimary) || product.images?.[0];
+                  const imageUrl = primaryImage?.url || product.imageUrl;
+                  // Get second image for hover effect
+                  const secondImage = product.images?.filter(img => !img.isPrimary)?.[0];
+                  
+                  return (
+                    <ProductCard
+                      key={product.id}
+                      id={product.id}
+                      name={product.name}
+                      slug={product.slug}
+                      price={product.price}
+                      compareAtPrice={product.compareAtPrice}
+                      imageUrl={imageUrl}
+                      hoverImageUrl={secondImage?.url}
+                      isNew={product.isNew}
+                      hasFreeShipping={product.price >= appSettings.shipping.freeShippingThreshold}
+                    />
+                  );
+                })}
               </div>
 
               <div className="text-center mt-8">

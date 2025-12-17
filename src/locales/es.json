@@ -202,6 +202,7 @@
       "basicInfo": "Información Básica",
       "pricesInventory": "Precios e Inventario",
       "productDetails": "Detalles del Producto",
+      "productImages": "Imágenes del Producto",
       "options": "Opciones",
       "sku": "SKU",
       "skuPlaceholder": "BLOCK-001",
@@ -253,16 +254,33 @@
       "invalidFileType": "Por favor selecciona un archivo Excel (.xlsx o .xls)",
       "fileTooLarge": "El archivo es demasiado grande (máximo 5MB)",
       "importSuccess": "{count} productos importados exitosamente",
-      "importError": "Error al importar productos"
+      "importError": "Error al importar productos",
+      "imageUploadSuccess": "Imagen subida correctamente",
+      "imageUploadError": "Error al subir la imagen",
+      "imageDeleteSuccess": "Imagen eliminada correctamente",
+      "imageDeleteError": "Error al eliminar la imagen",
+      "imagePrimarySuccess": "Imagen principal actualizada",
+      "imagePrimaryError": "Error al establecer imagen principal",
+      "imageMaxLimit": "Máximo {max} imágenes permitidas",
+      "imageInvalidType": "{name} no es un archivo de imagen válido",
+      "imageMaxSize": "{name} excede el tamaño máximo de {max}MB",
+      "dragOrUpload": "o arrastra archivos aquí",
+      "uploading": "Subiendo...",
+      "uploadButton": "Subir Imagen",
+      "imageTitle": "Imágenes del Producto",
+      "imageHint": "Formatos: JPEG, PNG, WebP. Máximo {max}MB por imagen. Arrastra para reordenar.",
+      "imagePrimary": "Principal"
     }
   },
   "product": {
-    "freeShipping": "Envío gratis",
+    "freeShipping": "Envío Gratis",
     "new": "Nuevo",
     "addToCart": "Agregar al carrito",
     "buyNow": "Comprar ahora",
     "description": "Descripción",
     "specifications": "Especificaciones",
-    "reviews": "Reseñas"
+    "reviews": "Reseñas",
+    "sameDayShipping": "ENVÍO MISMO DÍA",
+    "pickupInStore": "RECOGE EN TIENDA"
   }
 }

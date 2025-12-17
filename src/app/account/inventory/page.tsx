@@ -8,6 +8,7 @@ import { useToastContext } from '@/contexts/ToastContext';
 import { productsApi, Product } from '@/lib/api/products';
 import ConfirmDialog from '@/components/ui/ConfirmDialog';
 import Button from '@/components/ui/Button';
+import ImagePreviewModal from '@/components/ui/ImagePreviewModal';
 import { EditIcon, DeleteIcon, UploadIcon } from '@/components/ui/icons';
 import styles from './inventory.module.css';
 
@@ -23,6 +24,7 @@ export default function InventoryPage() {
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [deleteDialog, setDeleteDialog] = useState<{ isOpen: boolean; productId: string | null }>({ isOpen: false, productId: null });
   const [importing, setImporting] = useState(false);
+  const [imagePreview, setImagePreview] = useState<{ isOpen: boolean; url: string; alt: string }>({ isOpen: false, url: '', alt: '' });
   const fileInputRef = React.useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -69,6 +71,18 @@ export default function InventoryPage() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session, page, statusFilter]);
+
+  // Reload products when page receives focus (returning from edit page)
+  useEffect(() => {
+    const handleFocus = () => {
+      if (session && (session.user as any)?.role === 'admin') {
+        loadProducts();
+      }
+    };
+
+    window.addEventListener('focus', handleFocus);
+    return () => window.removeEventListener('focus', handleFocus);
+  }, [session]);
 
   useEffect(() => {
     // Check for toast message from sessionStorage after redirect
@@ -260,21 +274,22 @@ export default function InventoryPage() {
         <div className={styles.actionsBar}>
           <div className={styles.headerActions}>
             <Button 
-              variant="secondary"
-              size="medium"
+              variant="ghost"
+              size="icon"
               onClick={handleDownloadTemplate}
               title={t.inventory.downloadTemplate || 'Descargar Plantilla'}
             >
-              📥 {t.inventory.template || 'Plantilla'}
+              📥
             </Button>
             <Button 
-              variant="black"
-              size="medium"
+              variant="ghost"
+              size="icon"
               onClick={handleImportClick}
               loading={importing}
               disabled={importing}
+              title={t.inventory.importExcel || 'Importar Excel'}
             >
-              <UploadIcon size={16} /> {importing ? (t.inventory.importing || 'Importando...') : (t.inventory.importExcel || 'Importar Excel')}
+              <UploadIcon size={20} />
             </Button>
             <Button 
               variant="primary"
@@ -315,13 +330,18 @@ export default function InventoryPage() {
                       <td className={styles.sku}>{product.sku}</td>
                       <td className={styles.productName}>
                         <div className={styles.productInfo}>
-                          {product.images && product.images.length > 0 && (
-                            <img 
-                              src={product.images[0].url} 
-                              alt={product.name}
-                              className={styles.thumbnail}
-                            />
-                          )}
+                          {product.images && product.images.length > 0 && (() => {
+                            const primaryImage = product.images.find(img => img.isPrimary) || product.images[0];
+                            return (
+                              <img 
+                                src={primaryImage.url} 
+                                alt={product.name}
+                                className={styles.thumbnail}
+                                onClick={() => setImagePreview({ isOpen: true, url: primaryImage.url, alt: product.name })}
+                                style={{ cursor: 'pointer' }}
+                              />
+                            );
+                          })()}
                           <span>{product.name}</span>
                         </div>
                       </td>
@@ -408,6 +428,14 @@ export default function InventoryPage() {
           type="danger"
           onConfirm={handleDeleteConfirm}
           onCancel={() => setDeleteDialog({ isOpen: false, productId: null })}
+        />
+
+        {/* Image Preview Modal */}
+        <ImagePreviewModal
+          isOpen={imagePreview.isOpen}
+          imageUrl={imagePreview.url}
+          imageAlt={imagePreview.alt}
+          onClose={() => setImagePreview({ isOpen: false, url: '', alt: '' })}
         />
       </div>
     </div>

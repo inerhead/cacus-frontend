@@ -25,6 +25,18 @@ interface ImageUploadProps {
   onUpload?: (file: File, altText?: string) => Promise<ProductImage>;
   onDelete?: (imageId: string) => Promise<void>;
   onSetPrimary?: (imageId: string) => Promise<void>;
+  onShowToast?: (message: string, type: 'success' | 'error' | 'info') => void;
+  translations?: {
+    imageMaxLimit: string;
+    imageInvalidType: string;
+    imageMaxSize: string;
+    dragOrUpload?: string;
+    uploading?: string;
+    uploadButton?: string;
+    imageTitle?: string;
+    imageHint?: string;
+    imagePrimary?: string;
+  };
   disabled?: boolean;
 }
 
@@ -37,6 +49,8 @@ export default function ImageUpload({
   onUpload,
   onDelete,
   onSetPrimary,
+  onShowToast,
+  translations,
   disabled = false,
 }: ImageUploadProps) {
   const [uploading, setUploading] = useState(false);
@@ -49,20 +63,35 @@ export default function ImageUpload({
 
     // Validate number of images
     if (images.length + files.length > maxImages) {
-      alert(`Máximo ${maxImages} imágenes permitidas`);
+      const message = translations?.imageMaxLimit.replace('{max}', String(maxImages)) || `Máximo ${maxImages} imágenes permitidas`;
+      if (onShowToast) {
+        onShowToast(message, 'error');
+      } else {
+        alert(message);
+      }
       return;
     }
 
     for (const file of files) {
       // Validate file type
       if (!file.type.startsWith('image/')) {
-        alert(`${file.name} no es un archivo de imagen válido`);
+        const message = translations?.imageInvalidType.replace('{name}', file.name) || `${file.name} no es un archivo de imagen válido`;
+        if (onShowToast) {
+          onShowToast(message, 'error');
+        } else {
+          alert(message);
+        }
         continue;
       }
 
       // Validate file size
       if (file.size > maxSizeInMB * 1024 * 1024) {
-        alert(`${file.name} excede el tamaño máximo de ${maxSizeInMB}MB`);
+        const message = translations?.imageMaxSize.replace('{name}', file.name).replace('{max}', String(maxSizeInMB)) || `${file.name} excede el tamaño máximo de ${maxSizeInMB}MB`;
+        if (onShowToast) {
+          onShowToast(message, 'error');
+        } else {
+          alert(message);
+        }
         continue;
       }
 
@@ -81,11 +110,11 @@ export default function ImageUpload({
       if (productId && onUpload) {
         try {
           setUploading(true);
-          const uploadedImage = await onUpload(file);
-          onChange([...images, uploadedImage]);
+          await onUpload(file);
+          // Parent component handles state update via handleImageUpload
         } catch (error) {
           console.error('Error uploading image:', error);
-          alert('Error al subir la imagen');
+          // Parent component shows error toast
         } finally {
           setUploading(false);
         }
@@ -189,15 +218,15 @@ export default function ImageUpload({
     <div className={styles.container}>
       <div className={styles.header}>
         <label className={styles.label}>
-          Imágenes del Producto ({images.length}/{maxImages})
+          {translations?.imageTitle || 'Imágenes del Producto'} ({images.length}/{maxImages})
         </label>
         <p className={styles.hint}>
-          Formatos: JPEG, PNG, WebP. Máximo {maxSizeInMB}MB por imagen. Arrastra para reordenar.
+          {translations?.imageHint?.replace('{max}', maxSizeInMB.toString()) || `Formatos: JPEG, PNG, WebP. Máximo ${maxSizeInMB}MB por imagen. Arrastra para reordenar.`}
         </p>
       </div>
 
       <div className={styles.grid}>
-        {images.map((image, index) => (
+        {images.filter(img => img && (img.url || img.preview)).map((image, index) => (
           <div
             key={image.id || index}
             className={`${styles.imageCard} ${draggedIndex === index ? styles.dragging : ''}`}
@@ -208,14 +237,14 @@ export default function ImageUpload({
           >
             <div className={styles.imageWrapper}>
               <Image
-                src={image.preview || image.url}
+                src={image.preview || image.url || ''}
                 alt={image.altText || `Product image ${index + 1}`}
                 fill
                 style={{ objectFit: 'cover' }}
                 unoptimized
               />
               {image.isPrimary && (
-                <div className={styles.primaryBadge}>Principal</div>
+                <div className={styles.primaryBadge}>{translations?.imagePrimary || 'Principal'}</div>
               )}
               <div className={styles.orderBadge}>{index + 1}</div>
             </div>
@@ -223,15 +252,17 @@ export default function ImageUpload({
             <div className={styles.actions}>
               {!image.isPrimary && (
                 <Button
+                  type="button"
                   variant="ghost"
                   size="small"
                   onClick={() => handleSetPrimary(index)}
                   disabled={disabled}
                 >
-                  ⭐ Principal
+                  ⭐ {translations?.imagePrimary || 'Principal'}
                 </Button>
               )}
               <Button
+                type="button"
                 variant="danger"
                 size="icon"
                 onClick={() => handleRemove(index)}
@@ -255,6 +286,7 @@ export default function ImageUpload({
               disabled={disabled || uploading}
             />
             <Button
+              type="button"
               variant="primary"
               size="medium"
               onClick={() => fileInputRef.current?.click()}
@@ -262,10 +294,10 @@ export default function ImageUpload({
               loading={uploading}
               icon={<UploadIcon size={20} />}
             >
-              {uploading ? 'Subiendo...' : 'Subir Imagen'}
+              {uploading ? translations?.uploading || 'Subiendo...' : translations?.uploadButton || 'Subir Imagen'}
             </Button>
             <p className={styles.uploadHint}>
-              o arrastra archivos aquí
+              {translations?.dragOrUpload || 'o arrastra archivos aquí'}
             </p>
           </div>
         )}

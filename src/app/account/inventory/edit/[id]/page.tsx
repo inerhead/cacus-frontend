@@ -7,6 +7,7 @@ import { useTranslation } from '@/contexts/LanguageContext';
 import { useToastContext } from '@/contexts/ToastContext';
 import { productsApi, Product } from '@/lib/api/products';
 import Button from '@/components/ui/Button';
+import ImageUpload from '@/components/products/ImageUpload';
 import styles from '../edit-product.module.css';
 
 export default function EditProductPage() {
@@ -34,6 +35,7 @@ export default function EditProductPage() {
     allowBackorder: false,
   });
   
+  const [images, setImages] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
 
@@ -75,6 +77,10 @@ export default function EditProductPage() {
         isNew: product.isNew || false,
         allowBackorder: product.allowBackorder || false,
       });
+
+      // Load product images
+      const productImages = await productsApi.getImages(productId);
+      setImages(productImages);
     } catch (err) {
       console.error('Error loading product:', err);
       showToast(t.inventory.messages.loadError, 'error');
@@ -92,6 +98,66 @@ export default function EditProductPage() {
       setFormData(prev => ({ ...prev, [name]: checked }));
     } else {
       setFormData(prev => ({ ...prev, [name]: value }));
+    }
+  };
+
+  const handleImageUpload = async (file: File, altText?: string): Promise<any> => {
+    try {
+      const accessToken = (session as any)?.accessToken;
+      if (!accessToken) {
+        showToast(t.inventory.messages.noSession, 'error');
+        throw new Error('No session token');
+      }
+
+      const uploadedImage = await productsApi.uploadImage(productId, file, altText, accessToken);
+      console.log('Uploaded image response:', uploadedImage);
+      
+      // Ensure the image has the required properties
+      if (uploadedImage && uploadedImage.url) {
+        setImages(prev => [...prev, uploadedImage]);
+        showToast(t.inventory.messages.imageUploadSuccess, 'success');
+        return uploadedImage;
+      } else {
+        throw new Error('Invalid image response from server');
+      }
+    } catch (error) {
+      console.error('Error uploading image:', error);
+      showToast(t.inventory.messages.imageUploadError, 'error');
+      throw error;
+    }
+  };
+
+  const handleImageDelete = async (imageId: string) => {
+    try {
+      const accessToken = (session as any)?.accessToken;
+      if (!accessToken) {
+        showToast(t.inventory.messages.noSession, 'error');
+        return;
+      }
+
+      await productsApi.deleteImage(imageId, accessToken);
+      setImages(prev => prev.filter(img => img.id !== imageId));
+      showToast(t.inventory.messages.imageDeleteSuccess, 'success');
+    } catch (error) {
+      console.error('Error deleting image:', error);
+      showToast(t.inventory.messages.imageDeleteError, 'error');
+    }
+  };
+
+  const handleSetPrimaryImage = async (imageId: string) => {
+    try {
+      const accessToken = (session as any)?.accessToken;
+      if (!accessToken) {
+        showToast(t.inventory.messages.noSession, 'error');
+        return;
+      }
+
+      await productsApi.setPrimaryImage(imageId, accessToken);
+      setImages(prev => prev.map(img => ({ ...img, isPrimary: img.id === imageId })));
+      showToast(t.inventory.messages.imagePrimarySuccess, 'success');
+    } catch (error) {
+      console.error('Error setting primary image:', error);
+      showToast(t.inventory.messages.imagePrimaryError, 'error');
     }
   };
 
@@ -385,6 +451,30 @@ export default function EditProductPage() {
                 <span>{t.inventory.form.allowBackorder}</span>
               </label>
             </div>
+          </div>
+
+          <div className={styles.section}>
+            <h2 className={styles.sectionTitle}>{t.inventory.form.productImages}</h2>
+            <ImageUpload
+              productId={productId}
+              images={images}
+              onUpload={handleImageUpload}
+              onDelete={handleImageDelete}
+              onSetPrimary={handleSetPrimaryImage}
+              onChange={setImages}
+              onShowToast={showToast}
+              translations={{
+                imageMaxLimit: t.inventory.messages.imageMaxLimit,
+                imageInvalidType: t.inventory.messages.imageInvalidType,
+                imageMaxSize: t.inventory.messages.imageMaxSize,
+                dragOrUpload: t.inventory.messages.dragOrUpload,
+                uploading: t.inventory.messages.uploading,
+                uploadButton: t.inventory.messages.uploadButton,
+                imageTitle: t.inventory.messages.imageTitle,
+                imageHint: t.inventory.messages.imageHint,
+                imagePrimary: t.inventory.messages.imagePrimary,
+              }}
+            />
           </div>
 
           <div className={styles.formActions}>
