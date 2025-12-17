@@ -6,14 +6,17 @@ import { Search, User, ShoppingBag, ChevronDown } from 'lucide-react';
 import { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { useTranslation } from '@/contexts/LanguageContext';
+import { useCart } from '@/contexts/CartContext';
 import { AdminBadge } from '@/components/ui/AdminBadge';
-import CurrencySelector from './CurrencySelector';
+import CartDrawer from '@/components/cart/CartDrawer';
 import styles from './Header.module.css';
 
 export default function Header() {
   const [searchQuery, setSearchQuery] = useState('');
+  const [isCartOpen, setIsCartOpen] = useState(false);
   const { data: session } = useSession();
   const t = useTranslation();
+  const { totalItems } = useCart();
 
   const navigationItems = [
     { label: t.navigation.themes, href: '/temas', hasDropdown: true },
@@ -35,8 +38,8 @@ export default function Header() {
                 <Image
                   src="/assets/logo-cacus.svg"
                   alt="CACUS Gift logo"
-                  width={220}
-                  height={120}
+                  width={300}
+                  height={160}
                   priority
                   className={styles.logoImage}
                 />
@@ -56,7 +59,6 @@ export default function Header() {
 
             <div className={styles.userIconsArea}>
               <div className={styles.userIcons}>
-                <CurrencySelector />
                 <div className={styles.userSection}>
                   <Link
                     href={session ? "/account" : "/login"}
@@ -91,10 +93,16 @@ export default function Header() {
                     </span>
                   )}
                 </div>
-                <Link href="/cart" className={styles.iconLink} aria-label={t.header.cart}>
+                <button 
+                  onClick={() => setIsCartOpen(true)}
+                  className={styles.iconLink} 
+                  aria-label={t.header.cart}
+                >
                   <ShoppingBag size={22} />
-                  <span className={styles.cartBadge}>0</span>
-                </Link>
+                  {totalItems > 0 && (
+                    <span className={styles.cartBadge}>{totalItems}</span>
+                  )}
+                </button>
               </div>
             </div>
           </div>
@@ -126,6 +134,12 @@ export default function Header() {
           </nav>
         </div>
       </div>
+
+      {/* Cart Drawer */}
+      <CartDrawer 
+        isOpen={isCartOpen}
+        onClose={() => setIsCartOpen(false)}
+      />
     </header>
   );
 }

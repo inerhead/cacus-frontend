@@ -163,6 +163,19 @@
 
 .languageButton.active {
   background-color: #FFEB3B;
+}
+
+/* Currency Selector Section */
+.currencySelector {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sectionDescription {
+  font-size: 0.875rem;
+  color: #666;
+  margin: 0;
   border-color: #000;
   font-weight: 700;
 }

@@ -29,6 +29,13 @@
     "shippingBanner": "ENVÍOS SEGUROS Y GRATIS EN COMPRAS A PARTIR DE $299.900",
     "currency": "Moneda"
   },
+  "cart": {
+    "title": "MI CARRITO",
+    "empty": "Tu carrito está vacío",
+    "total": "TOTAL",
+    "checkout": "IR A PAGAR",
+    "items": "artículos"
+  },
   "navigation": {
     "themes": "TEMAS",
     "interest": "INTERÉS",
@@ -96,6 +103,8 @@
     "backToProfile": "Volver al Perfil",
     "defaultUser": "Usuario",
     "language": "Idioma / Language",
+    "currencyPreference": "Preferencia de Moneda",
+    "currencyDescription": "Selecciona la moneda en la que prefieres ver los precios",
     "defaultAddress": "Dirección predeterminada",
     "viewAddresses": "ver direcciones ({count})",
     "noAddresses": "No tienes direcciones guardadas",
@@ -311,6 +320,7 @@
     "freeShipping": "Envío Gratis",
     "new": "Nuevo",
     "addToCart": "Agregar al carrito",
+    "addedToCart": "agregado al carrito",
     "buyNow": "Comprar ahora",
     "description": "Descripción",
     "specifications": "Especificaciones",

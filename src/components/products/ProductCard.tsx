@@ -7,6 +7,8 @@ import { ShoppingCart } from 'lucide-react';
 import appSettings from '@/config/settings';
 import { useTranslation } from '@/contexts/LanguageContext';
 import { useCurrency } from '@/contexts/CurrencyContext';
+import { useCart } from '@/contexts/CartContext';
+import { useToastContext } from '@/contexts/ToastContext';
 
 interface ProductCardProps {
   id: string;
@@ -36,6 +38,8 @@ export default function ProductCard({
   const [isHovered, setIsHovered] = React.useState(false);
   const t = useTranslation();
   const { formatPrice } = useCurrency();
+  const { addItem } = useCart();
+  const { showToast } = useToastContext();
   // Use settings for defaults
   const settings = appSettings;
   const defaultImage = imageUrl || settings.images.productPlaceholder;
@@ -109,8 +113,14 @@ export default function ProductCard({
                 onClick={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
-                  // TODO: Add to cart logic
-                  console.log('Add to cart:', id);
+                  addItem({
+                    productId: id,
+                    name,
+                    price,
+                    primaryImageUrl: imageUrl,
+                    slug,
+                  });
+                  showToast(`${name} ${t.product.addedToCart || 'agregado al carrito'}`, 'success');
                 }}
                 className="btn-lego flex items-center justify-center gap-2 text-sm px-4 py-2 shadow-lg hover:scale-105 transition-transform"
                 aria-label={t.product.addToCart}

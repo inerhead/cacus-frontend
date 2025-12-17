@@ -25,18 +25,18 @@
 }
 
 .headerContainer {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 0 1.25rem;
+  padding: 0 2rem;
 }
 
 .topRow {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  column-gap: 1.5rem;
-  padding: 0.75rem 0;
-  min-height: 80px;
+  column-gap: 2rem;
+  padding: 2rem 0;
+  min-height: 140px;
 }
 
 .logoArea,
@@ -71,9 +71,9 @@
 
 .logoImage {
   display: block;
-  width: 180px;
+  width: 300px;
   height: auto;
-  max-height: 75px;
+  max-height: 130px;
   filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.25));
   transition: transform 0.3s ease, filter 0.3s ease;
 }
@@ -96,7 +96,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  font-size: 0.83rem;
+  font-size: 0.9rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -164,10 +164,10 @@
 }
 
 .userFirstName {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 600;
   color: #111111;
-  max-width: 120px;
+  max-width: 140px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

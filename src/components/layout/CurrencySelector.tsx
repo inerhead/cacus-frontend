@@ -11,7 +11,7 @@ export default function CurrencySelector() {
       <select
         value={currencyCode}
         onChange={(e) => setCurrency(e.target.value as CurrencyCode)}
-        className="bg-transparent text-black border border-gray-300 px-3 py-1 text-sm font-semibold uppercase cursor-pointer hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-lego-yellow"
+        className="bg-transparent text-black border border-gray-800 px-2 py-1 text-sm font-semibold uppercase cursor-pointer hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-lego-yellow rounded"
         aria-label="Select currency"
       >
         {availableCurrencies.map((curr) => (

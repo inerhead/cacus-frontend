@@ -29,6 +29,13 @@
     "shippingBanner": "SECURE AND FREE SHIPPING ON PURCHASES OVER $299,900",
     "currency": "Currency"
   },
+  "cart": {
+    "title": "MY CART",
+    "empty": "Your cart is empty",
+    "total": "TOTAL",
+    "checkout": "CHECKOUT",
+    "items": "items"
+  },
   "navigation": {
     "themes": "THEMES",
     "interest": "INTEREST",
@@ -92,8 +99,12 @@
   },
   "account": {
     "title": "My Account",
-    "signOut": "Sign Out",    "backToProfile": "Back to Profile",    "defaultUser": "User",
+    "signOut": "Sign Out",
+    "backToProfile": "Back to Profile",
+    "defaultUser": "User",
     "language": "Language / Idioma",
+    "currencyPreference": "Currency Preference",
+    "currencyDescription": "Select the currency in which you prefer to see prices",
     "defaultAddress": "Default Address",
     "viewAddresses": "view addresses ({count})",
     "noAddresses": "You have no saved addresses",
@@ -309,6 +320,7 @@
     "freeShipping": "Free Shipping",
     "new": "New",
     "addToCart": "Add to cart",
+    "addedToCart": "added to cart",
     "buyNow": "Buy now",
     "description": "Description",
     "specifications": "Specifications",

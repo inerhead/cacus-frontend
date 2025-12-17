@@ -9,6 +9,7 @@ import { useLanguage, useTranslation } from '@/contexts/LanguageContext';
 import { addressesApi, Address } from '@/lib/api/addresses';
 import { productsApi } from '@/lib/api/products';
 import Button from '@/components/ui/Button';
+import CurrencySelector from '@/components/layout/CurrencySelector';
 import styles from './account.module.css';
 
 export default function AccountPage() {
@@ -136,6 +137,17 @@ export default function AccountPage() {
                 >
                   🇺🇸 English
                 </button>
+              </div>
+            </div>
+
+            {/* Currency Selector */}
+            <div className={styles.section}>
+              <h3 className={styles.sectionTitle}>💰 {t.account.currencyPreference}</h3>
+              <div className={styles.currencySelector}>
+                <p className={styles.sectionDescription}>
+                  {t.account.currencyDescription}
+                </p>
+                <CurrencySelector />
               </div>
             </div>
           </div>
