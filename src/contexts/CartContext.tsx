@@ -56,15 +56,21 @@ export function CartProvider({ children }: { children: ReactNode }) {
   };
 
   const mergeGuestCart = async () => {
+    // Only merge if there's a guest session to merge
+    if (typeof window === 'undefined') return;
+    const guestSessionId = localStorage.getItem('guest-session-id');
+    if (!guestSessionId) return;
+
     try {
-      const data = await cartApiClient.mergeCart();
+      const accessToken = (session as any)?.accessToken;
+      const data = await cartApiClient.mergeCart(accessToken);
       setCartData(data);
       // Clear guest session after merge
-      if (typeof window !== 'undefined') {
-        localStorage.removeItem('guest-session-id');
-      }
+      localStorage.removeItem('guest-session-id');
     } catch (error) {
       console.error('Error merging cart:', error);
+      // If merge fails, just load the user's cart
+      await loadCart();
     }
   };
 

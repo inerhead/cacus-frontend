@@ -222,7 +222,7 @@ const authConfig: NextAuthConfig = {
                 userId: data.user.id,
                 firstName: data.user.firstName || firstName,
                 avatarUrl: avatarUrl || data.user.avatarUrl,
-                role: data.user.role || 'customer',
+                role: data.user.role || 'USER',
                 preferredLanguage: data.user.preferredLanguage || 'es',
                 preferredCurrency: data.user.preferredCurrency || 'COP',
               };
@@ -242,7 +242,7 @@ const authConfig: NextAuthConfig = {
           userId: user.id,
           firstName: firstName || user.firstName,
           avatarUrl: avatarUrl,
-          role: user.role || 'customer',
+          role: user.role || 'USER',
           preferredLanguage: user.preferredLanguage || 'es',
           preferredCurrency: user.preferredCurrency || 'COP',
         };

@@ -46,12 +46,12 @@ export default function EditProductPage() {
     }
 
     const userRole = (session?.user as any)?.role;
-    if (status === 'authenticated' && userRole !== 'admin') {
+    if (status === 'authenticated' && userRole !== 'ADMIN') {
       router.push('/account');
       return;
     }
 
-    if (session && userRole === 'admin' && productId) {
+    if (session && userRole === 'ADMIN' && productId) {
       loadProduct();
     }
   }, [status, session, router, productId]);
@@ -220,7 +220,7 @@ export default function EditProductPage() {
   }
 
   const userRole = (session.user as any)?.role;
-  if (userRole !== 'admin') {
+  if (userRole !== 'ADMIN') {
     return null;
   }
 

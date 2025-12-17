@@ -1,17 +1,28 @@
 'use client';
 
 import Link from 'next/link';
-import { useTranslation } from '@/contexts/LanguageContext';
+import { useTranslation, useLanguage } from '@/contexts/LanguageContext';
 import ProductCard from '@/components/products/ProductCard';
 import { Product } from '@/lib/api/products';
 import appSettings from '@/config/settings';
 
 interface HomeContentProps {
   displayProducts: Product[];
+  initialHeroContent?: HomeHeroContent | null;
 }
 
-export default function HomeContent({ displayProducts }: HomeContentProps) {
+interface HomeHeroContent {
+  title: { es: string; en: string };
+  subtitle: { es: string; en: string };
+  featuredTitle?: { es: string; en: string };
+}
+
+export default function HomeContent({ displayProducts, initialHeroContent }: HomeContentProps) {
   const t = useTranslation();
+  const { language } = useLanguage();
+  
+  // Usar el contenido inicial sin estado ni efectos
+  const heroContent = initialHeroContent;
 
   const categoryIcons = [
     { label: t.categories.offers, icon: '🔧', href: '/ofertas' },
@@ -27,10 +38,10 @@ export default function HomeContent({ displayProducts }: HomeContentProps) {
       <section className="bg-gradient-to-r from-lego-blue-light to-lego-blue text-white py-16">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-5xl font-bold mb-4 uppercase">
-            {t.home.heroTitle}
+            {heroContent?.title[language] || t.home.heroTitle}
           </h1>
           <h2 className="text-3xl font-bold mb-6">
-            {t.home.heroSubtitle}
+            {heroContent?.subtitle[language] || t.home.heroSubtitle}
           </h2>
           <Link href="/productos" className="btn-lego-black inline-block">
             {t.home.viewCatalog}
@@ -64,7 +75,7 @@ export default function HomeContent({ displayProducts }: HomeContentProps) {
       <section className="bg-gray-50 py-12">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-black mb-8 text-center uppercase">
-            {t.home.featuredTitle}
+            {heroContent?.featuredTitle?.[language] || t.home.featuredTitle}
           </h2>
 
           {displayProducts.length > 0 ? (

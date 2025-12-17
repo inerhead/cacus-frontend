@@ -50,6 +50,19 @@ export default function ProductCard({
     ? Math.round(((compareAtPrice - price) / compareAtPrice) * 100)
     : 0;
 
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    addItem({
+      productId: id,
+      name,
+      price,
+      primaryImageUrl: imageUrl,
+      slug,
+    });
+    showToast(`${name} ${t.product.addedToCart || 'agregado al carrito'}`, 'success');
+  };
+
   return (
     <div className="product-card group">
       {/* Image Container */}
@@ -106,34 +119,21 @@ export default function ProductCard({
             )}
           </div>
 
-          {/* Add to Cart Button - Shows on hover in top right corner */}
-          {isHovered && (
-            <div className="absolute top-2 right-2 z-20">
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  addItem({
-                    productId: id,
-                    name,
-                    price,
-                    primaryImageUrl: imageUrl,
-                    slug,
-                  });
-                  showToast(`${name} ${t.product.addedToCart || 'agregado al carrito'}`, 'success');
-                }}
-                className="btn-lego flex items-center justify-center gap-2 text-sm px-4 py-2 shadow-lg hover:scale-105 transition-transform"
-                aria-label={t.product.addToCart}
-              >
-                <ShoppingCart className="w-4 h-4" />
-                {t.product.addToCart}
-              </button>
-            </div>
-          )}
+          {/* Add to Cart Button - Shows on hover (desktop) */}
+          <div className={`absolute top-2 right-2 z-20 transition-opacity duration-300 hidden md:block ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
+            <button
+              onClick={handleAddToCart}
+              className="btn-lego flex items-center justify-center gap-2 text-sm px-4 py-2 shadow-lg hover:scale-105 transition-transform"
+              aria-label={t.product.addToCart}
+            >
+              <ShoppingCart className="w-4 h-4" />
+              {t.product.addToCart}
+            </button>
+          </div>
         </div>
 
         {/* Product Info */}
-        <div className="p-4">
+        <div className="p-4 pb-3">
           <h3 className="font-bold text-lg mb-2 text-black uppercase line-clamp-2 min-h-[3.5rem]">
             {name}
           </h3>
@@ -165,6 +165,18 @@ export default function ProductCard({
           )}
         </div>
       </Link>
+
+      {/* Mobile Add to Cart Button - Always visible on mobile */}
+      <div className="md:hidden px-4 pb-4">
+        <button
+          onClick={handleAddToCart}
+          className="btn-lego w-full flex items-center justify-center gap-2 text-sm py-3 shadow-md hover:scale-105 transition-transform"
+          aria-label={t.product.addToCart}
+        >
+          <ShoppingCart className="w-4 h-4" />
+          {t.product.addToCart}
+        </button>
+      </div>
     </div>
   );
 }

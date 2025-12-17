@@ -35,7 +35,7 @@ export default function InventoryPage() {
 
     // Check if user is admin
     const userRole = (session?.user as any)?.role;
-    if (status === 'authenticated' && userRole !== 'admin') {
+    if (status === 'authenticated' && userRole !== 'ADMIN') {
       router.push('/account');
       return;
     }
@@ -66,7 +66,7 @@ export default function InventoryPage() {
   };
 
   useEffect(() => {
-    if (session && (session.user as any)?.role === 'admin') {
+    if (session && (session.user as any)?.role === 'ADMIN') {
       loadProducts();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -75,7 +75,7 @@ export default function InventoryPage() {
   // Reload products when page receives focus (returning from edit page)
   useEffect(() => {
     const handleFocus = () => {
-      if (session && (session.user as any)?.role === 'admin') {
+      if (session && (session.user as any)?.role === 'ADMIN') {
         loadProducts();
       }
     };
@@ -234,7 +234,7 @@ export default function InventoryPage() {
   }
 
   const userRole = (session.user as any)?.role;
-  if (userRole !== 'admin') {
+  if (userRole !== 'ADMIN') {
     return null;
   }
 

@@ -114,7 +114,22 @@
     "admin": {
       "title": "Administration",
       "inventory": "Product Inventory",
-      "inventoryDescription": "Manage stock, prices and products"
+      "inventoryDescription": "Manage stock, prices and products",
+      "manageInventory": "manage inventory",
+      "editContent": "edit content",
+      "content": {
+        "title": "Dynamic Home Content",
+        "description": "Edit main hero titles and texts",
+        "pageTitle": "Home Content",
+        "mainTitle": "Main Title",
+        "subtitle": "Subtitle",
+        "featuredTitle": "Featured Products Title",
+        "saveButton": "Save Changes",
+        "saving": "Saving...",
+        "loadError": "Error loading content",
+        "saveSuccess": "Content updated successfully",
+        "saveError": "Error saving content"
+      }
     },
     "currency": {
       "title": "Currency Settings",

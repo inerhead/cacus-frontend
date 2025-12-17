@@ -29,9 +29,11 @@ export default function AccountPage() {
 
   useEffect(() => {
     if (session) {
+      console.log('[Account Page] Session user role:', (session.user as any)?.role);
+      console.log('[Account Page] Full session:', session);
       loadAddresses();
       // Load product count if user is admin
-      if ((session.user as any)?.role === 'admin') {
+      if ((session.user as any)?.role === 'ADMIN') {
         loadProductCount();
       }
     }
@@ -155,7 +157,7 @@ export default function AccountPage() {
           {/* Right Column - Addresses & Orders */}
           <div className={styles.column}>
             {/* Admin Inventory Section - Only visible for admin role */}
-            {(session.user as any)?.role === 'admin' && (
+            {(session.user as any)?.role === 'ADMIN' && (
               <>
                 <div className={styles.section}>
                   <h3 className={styles.sectionTitle}>⚙️ {t.account.admin.title}</h3>
@@ -165,7 +167,16 @@ export default function AccountPage() {
                       <p className={styles.addressText}>{t.account.admin.inventoryDescription}</p>
                     </div>
                     <Link href="/account/inventory" className={styles.link}>
-                      gestionar inventario ({productCount})
+                      {t.account.admin.manageInventory || 'gestionar inventario'} ({productCount})
+                    </Link>
+                  </div>
+                  <div className={styles.addressInfo} style={{ marginTop: '1rem' }}>
+                    <div className={styles.addressDetails}>
+                      <p className={styles.addressName}>{t.account.admin.content.title}</p>
+                      <p className={styles.addressText}>{t.account.admin.content.description}</p>
+                    </div>
+                    <Link href="/admin/content" className={styles.link}>
+                      {t.account.admin.editContent || 'editar contenido'} →
                     </Link>
                   </div>
                 </div>

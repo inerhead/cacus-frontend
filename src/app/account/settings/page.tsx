@@ -21,7 +21,7 @@ export default function SettingsPage() {
     setMounted(true);
     
     // Verificar que es admin
-    if (session && (session.user as any)?.role !== 'admin') {
+    if (session && (session.user as any)?.role !== 'ADMIN') {
       router.push('/account');
       return;
     }
@@ -43,7 +43,7 @@ export default function SettingsPage() {
     return null;
   }
 
-  if ((session.user as any)?.role !== 'admin') {
+  if ((session.user as any)?.role !== 'ADMIN') {
     return null;
   }
 
@@ -83,23 +83,24 @@ export default function SettingsPage() {
   return (
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="container mx-auto px-4 max-w-2xl">
-        <div className="mb-6 flex items-center justify-between">
-          <div className="flex-1">
-            <h1 className="text-3xl font-bold text-black uppercase">
-              ⚙️ {t.account.settings.title}
-            </h1>
-            <p className="text-gray-600 mt-2">
-              {t.account.settings.subtitle}
-            </p>
-          </div>
+        <div className="mb-4">
           <Button 
-            variant="primary"
-            size="medium"
+            variant="ghost"
+            size="small"
             onClick={() => router.push('/account')}
             type="button"
           >
             ← {t.account.backToProfile}
           </Button>
+        </div>
+
+        <div className="mb-6">
+          <h1 className="text-3xl font-bold text-black uppercase">
+            ⚙️ {t.account.settings.title}
+          </h1>
+          <p className="text-gray-600 mt-2">
+            {t.account.settings.subtitle}
+          </p>
         </div>
 
         <div className="bg-white rounded-lg shadow-md p-6">

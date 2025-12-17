@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getSession } from 'next-auth/react';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
 
@@ -21,12 +22,22 @@ const cartApi = axios.create({
   },
 });
 
-// Add session ID to all requests
-cartApi.interceptors.request.use((config) => {
+// Add session ID and auth token to all requests
+cartApi.interceptors.request.use(async (config) => {
+  // Add session ID
   const sessionId = getSessionId();
   if (sessionId) {
     config.headers['x-session-id'] = sessionId;
   }
+
+  // Add auth token if user is logged in
+  if (typeof window !== 'undefined') {
+    const session = await getSession();
+    if (session?.accessToken) {
+      config.headers['Authorization'] = `Bearer ${session.accessToken}`;
+    }
+  }
+
   return config;
 });
 
@@ -83,8 +94,12 @@ export const cartApiClient = {
   },
 
   // Merge guest cart with user cart (call after login)
-  mergeCart: async (): Promise<CartData> => {
-    const { data } = await cartApi.post('/merge');
+  mergeCart: async (accessToken?: string): Promise<CartData> => {
+    const headers: any = {};
+    if (accessToken) {
+      headers['Authorization'] = `Bearer ${accessToken}`;
+    }
+    const { data } = await cartApi.post('/merge', {}, { headers });
     return data;
   },
 };

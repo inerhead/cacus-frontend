@@ -114,7 +114,22 @@
     "admin": {
       "title": "Administración",
       "inventory": "Inventario de Productos",
-      "inventoryDescription": "Gestionar stock, precios y productos"
+      "inventoryDescription": "Gestionar stock, precios y productos",
+      "manageInventory": "gestionar inventario",
+      "editContent": "editar contenido",
+      "content": {
+        "title": "Contenido Dinámico del Home",
+        "description": "Editar títulos y textos del hero principal",
+        "pageTitle": "Contenido del Home",
+        "mainTitle": "Título Principal",
+        "subtitle": "Subtítulo",
+        "featuredTitle": "Título Productos Destacados",
+        "saveButton": "Guardar Cambios",
+        "saving": "Guardando...",
+        "loadError": "Error al cargar el contenido",
+        "saveSuccess": "Contenido actualizado correctamente",
+        "saveError": "Error al guardar el contenido"
+      }
     },
     "currency": {
       "title": "Configuración de Monedas",

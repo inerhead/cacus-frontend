@@ -52,12 +52,12 @@ export default function NewProductPage() {
     }
 
     const userRole = (session?.user as any)?.role;
-    if (status === 'authenticated' && userRole !== 'admin') {
+    if (status === 'authenticated' && userRole !== 'ADMIN') {
       router.push('/account');
       return;
     }
 
-    if (session && userRole === 'admin') {
+    if (session && userRole === 'ADMIN') {
       loadCategories();
     }
   }, [status, session, router]);
@@ -160,7 +160,7 @@ export default function NewProductPage() {
   }
 
   const userRole = (session.user as any)?.role;
-  if (userRole !== 'admin') {
+  if (userRole !== 'ADMIN') {
     return null;
   }
 
